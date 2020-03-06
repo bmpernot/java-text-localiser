@@ -155,7 +155,6 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	
 	double exchangeRate = 0;		// find a way to allow for more currencies to be added
 	
-	
 	if (inputFormat.equals("UK")) {
 		if (outputFormat.equals("DE")) {
 			exchangeRate = 1.15;
