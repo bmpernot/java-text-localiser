@@ -1,0 +1,66 @@
+package textLocaliserTest;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import java.util.HashMap;
+import java.util.Map;
+
+public interface TextLocaliser {
+	
+	public void loadDateFormats(Map<String, String> dateformats);
+	public String localiesDate(String inputFormat, String outputFormat, String inputText);
+	
+	public void loadCurrencyFormats(Map<String, String> currencyformats);
+	public String localiseCurrency(String inputFormat, double outputFormat, double inputText);
+	
+	public String localise(String inputFormat, String outputFormat, String inputtext);
+	
+}
+class Method {
+	
+	public void loadDateFormat(String dateformat) {
+		Map<String, String> dateformats = new HashMap<String, String>();
+		dateformats.put("US", "mm/dd/yy");
+		dateformats.put("UK", "dd/mm/yyyy");
+		dateformats.put("DE", "yyyy-mm-dd");
+		
+		//return dateformats.get(dateformat);
+		
+		//test//
+		System.out.println(dateformats.get("US"));
+		System.out.println(dateformats.get("UK"));
+		System.out.println(dateformats.get("DE"));
+		//test//
+	}
+
+	public String localiseDate() {
+		localisedDate = "String";
+		return localisedDate;
+	}
+	
+	void loadCurrencyFormat(String currencyformat) {
+		Map<String, String> currencyformats = new HashMap<String, String>();
+		currencyformats.put("US", "en_US");
+		currencyformats.put("UK", "en_GB");
+		currencyformats.put("DE", "de_DE");
+		
+		//return currencyformats.get(currencyformat);
+		
+		//test//
+		System.out.println(currencyformats.get("US"));
+		System.out.println(currencyformats.get("UK"));
+		System.out.println(currencyformats.get("DE"));
+		//test//
+	}
+	
+	public String localiseCurrency() {
+		localisedCurrency = "String";
+		return localisedCurrency;
+	}
+	
+	public String localise() {
+		localisedValues = "String";
+		return localisedValues;
+	}
+
+}

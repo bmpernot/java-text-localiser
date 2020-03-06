@@ -1,0 +1,139 @@
+package textLocaliserTest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MyTextLocaliser implements TextLocaliser {
+	
+public boolean isDigit(String character) {
+	if ("0123456789".contains(character)) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+	
+public String findDelimiter(String Text) {
+	
+	boolean delimiter = false;
+	String array[] = Text.split("");
+	int n = 0;
+	String delimiterValue = null;
+	
+	while (delimiter == false) {
+		
+		boolean found = isDigit(array[n]);
+		
+		if(found == true) {
+			delimiter = true;
+			delimiterValue = array[n];
+			
+		}
+		
+		else {n++;}
+	}
+	return delimiterValue;
+}
+
+public int findIndexNumber(String array [], String value) {
+	int indexNumberValue = 0;
+	boolean foundValue = false;
+	while (foundValue == false) {
+		boolean test = array[indexNumberValue].contains(value);
+		if (test == true) {
+			foundValue = true;
+		}
+		else {
+			indexNumberValue++;
+		}
+	}
+	return indexNumberValue;
+}
+
+
+public static void main (String [] args) {
+	TextLocaliser MyConverter = new MyTextLocaliser();
+	
+	Map<String, String> dateformats = new HashMap<String, String>();
+	MyConverter.loadDateFormats(dateformats); // how does this work
+	
+	Map<String, String> currencyformats = new HashMap<String, String>();
+	MyConverter.loadCurrencyFormats(currencyformats); // how does this work
+}
+
+
+
+@Override
+public void loadDateFormats(Map<String, String> dateformats) {
+	dateformats = new HashMap<String, String>();		// Don't know if this is necessary
+	dateformats.put("US", "mm/dd/yy");
+	dateformats.put("UK", "dd/mm/yyyy");
+	dateformats.put("DE", "yyyy-mm-dd");
+													// ask how to use this
+}
+
+@Override
+public String localiesDate(String inputFormat, String outputFormat, String inputText) {
+	
+	String inputTextDelimiterValue = findDelimiter(inputText);
+	String inputTextDateFields[] = inputText.split(inputTextDelimiterValue);
+	
+	String inputDateFormat = loadDateFormats(dateformats.get(inputFormat)); //how to get value
+	String inputFormatDelimiterValue = findDelimiter(inputDateFormat);
+	String inputFormatDateFields[] = inputText.split(inputFormatDelimiterValue);
+	
+	String outputDateFormat = dateformats.get(outputFormat); //how to get value
+	String outputFormatDelimiterValue = findDelimiter(outputDateFormat);
+	String outputFormatDateFields[] = inputText.split(outputFormatDelimiterValue);
+	
+	Map<String, String> convert = new HashMap<String, String>();
+	for (int i = 0; i <= inputFormatDateFields.length; i++) {
+		convert.put(inputFormatDateFields[i], inputTextDateFields[i]);
+	}
+	
+	int inputYear = findIndexNumber(inputFormatDateFields, "y");
+	int outputYear = findIndexNumber(outputFormatDateFields, "y");
+	
+	if (outputFormatDateFields[outputYear] == inputFormatDateFields[inputYear]) {
+		continue;
+	}
+	else if (inputFormatDateFields[inputYear].equals("yy")) {
+		outputFormatDateFields[outputYear] = "20" + inputTextDateFields[inputYear];
+	}
+	
+	else {
+		outputFormatDateFields[outputYear] = inputTextDateFields[inputYear].substring(2);
+	}
+	
+	String localisedDate = convert.get(outputFormatDateFields[0]) + outputFormatDelimiterValue + 
+			convert.get(outputFormatDateFields[1]) + outputFormatDelimiterValue + 
+			convert.get(outputFormatDateFields[2]);
+	return localisedDate;
+}
+
+@Override
+public void loadCurrencyFormats(Map<String, String> currencyformats) {
+	//Map<String, String> currencyformats = new HashMap<String, String>();
+	//currencyformats.put("US", "en_US");	// find out what en_US, en_GB and de_DE mean
+	//currencyformats.put("UK", "en_GB");
+	//currencyformats.put("DE", "de_DE");
+			// ask how to use this and why it is here
+	
+}
+
+@Override
+public String localiseCurrency(String inputFormat, double outputFormat, double inputText) {
+	
+	
+	
+	String localisedCurrency = "String";
+	return localisedCurrency;
+}
+
+@Override
+public String localise(String inputFormat, String outputFormat, String inputtext) {
+	String localisedValues = "String";
+	return localisedValues;
+}}
+

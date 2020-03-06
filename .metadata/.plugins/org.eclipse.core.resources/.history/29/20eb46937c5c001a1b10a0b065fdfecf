@@ -1,0 +1,96 @@
+package textLocaliserTest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MyTextLocaliser implements TextLocaliser {
+	
+	TextLocaliser loadDateFormat(Map<String, String> dateformats) {
+		Map<String, String> dateformat = new HashMap<String, String>();
+			//dateformat.put("US", "mm/dd/yy");
+			//dateformat.put("UK", "dd/mm/yyyy");
+			//dateformat.put("DE", "yyyy-mm-dd");
+				// ask how to use this and why it is here
+	}
+
+	public String localiseDate(String inputFormat, String outputFormat, String inputText) {
+
+		String inputTextDelimiterValue = findDelimiter(inputText);
+		String inputTextDateFields[] = inputText.split(inputTextDelimiterValue);
+		
+		String inputFormatDelimiterValue = findDelimiter(inputFormat); //needs to change
+		String inputFormatDateFields[] = inputText.split(inputFormatDelimiterValue);
+		
+		String outputFormatDelimiterValue = findDelimiter(outputFormat); //needs to change
+		String outputFormatDateFields[] = inputText.split(outputFormatDelimiterValue);
+		
+	
+		
+		//loadDateFormat(Map<"US","mm/dd/yy">);
+		
+		//loadDateFormat(Map<"UK", "dd/mm/yyyy">);
+		//loadDateFormat(Map<"DE", "yyyy-mm-dd">);	
+		
+		//String inputDateFormat = loadDateFormat.dateformat.get(inputFormat);
+		//String outputDateFormat = loadDateFormat.dateformat.get(outputFormat);
+		
+		String localisedDate = "EXAMPLE";
+		return localisedDate;
+	}
+	
+	public void loadCurrencyFormat(String currencyformat) {
+		Map<String, String> currencyformats = new HashMap<String, String>();
+		currencyformats.put("US", "en_US");	// find out what en_US, en_GB and de_DE mean
+		currencyformats.put("UK", "en_GB");
+		currencyformats.put("DE", "de_DE");
+				// ask how to use this and why it is here	
+	}
+	
+	public String localiseCurrency() {
+		String localisedCurrency = "String";
+		return localisedCurrency;
+	}
+	
+	public String localise() {
+		String localisedValues = "String";
+		return localisedValues;
+	}
+	
+	
+	
+	public boolean isDigit(String character) {
+		if ("0123456789".contains(character)) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	public String findDelimiter(String Text) {
+		
+		boolean delimiter = false;
+		String array[] = Text.split("");
+		int n = 0;
+		String delimiterValue = null;
+		
+		while (delimiter == false) {
+			
+			boolean found = isDigit(array[n]);
+			
+			if(found == true) {
+				delimiter = true;
+				delimiterValue = array[n];
+				return delimiterValue;
+			}
+			
+			else {n++;}
+		}
+	}
+}
+
+public static void main (String [] args) {
+	TextLocaliser MyConverter = new MyTextLocaliser();
+}
+
+
