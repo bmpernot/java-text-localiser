@@ -203,8 +203,6 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	// 	need to read through text file String to find inputDates D[xx/xx/xx] and inputCurrency C[£xx.xx]
 	//	for date i might need to do it twice for brought and delivered dates, use a while loop
 	
-	
-	
 	String inputDate = "Example";		// replace with real one
 	String localInputDate = localiesDate(inputFormat, outputFormat, inputDate);
 	

@@ -35,8 +35,8 @@ public static void main (String [] args) {
 		inputText = inputText + " " + fileLines.get(n);
 		n++;
 
-	String inputCountry = "US";		// for example text file
-	String outputCountry = "UK";	// for example text file
+	String inputCountry = "US";
+	String outputCountry = "UK";
 	MyConverter.localise(inputCountry, outputCountry, inputText);
 }
 	
@@ -203,8 +203,6 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	// 	need to read through text file String to find inputDates D[xx/xx/xx] and inputCurrency C[£xx.xx]
 	//	for date i might need to do it twice for brought and delivered dates, use a while loop
 	
-	
-	
 	String inputDate = "Example";		// replace with real one
 	String localInputDate = localiesDate(inputFormat, outputFormat, inputDate);
 	
@@ -214,8 +212,6 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	double inputCurrency = 1000.00;		// replace with real one
 	String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
 	
-	String localisedValues = localInputDate + localOutputDate + localCurrency;		
-	// not correct need to create a new text file
-	
+	String localisedValues = localInputDate + localOutputDate + localCurrency;		// not correct need to create a new text file
 	return localisedValues;
 }}
