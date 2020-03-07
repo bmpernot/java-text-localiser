@@ -40,7 +40,8 @@ public static void main (String [] args) {
 	MyConverter.localise(inputCountry, outputCountry, inputText);
 }
 	
-
+	
+	
 public boolean isDigit(String character) {
 	if ("0123456789".contains(character)) {
 		return false;
@@ -194,28 +195,27 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	return localisedCurrency;
 }
 
-	//Completed up to this point
+//Completed up to this point
 
 @Override
 public String localise(String inputFormat, String outputFormat, String inputtext) {
 	
-	int leftInputDate1 = inputtext.indexOf("D[");
-	int rightInputDate1 = inputtext.indexOf("]");
-	String inputDate1 = inputtext.substring(leftInputDate1+1, rightInputDate1);
-	String localInputDate1 = localiesDate(inputFormat, outputFormat, inputDate1);
+	// 	need to read through text file String to find inputDates D[xx/xx/xx] and inputCurrency C[£xx.xx]
+	//	for date i might need to do it twice for brought and delivered dates, use a while loop
 	
-	int leftInputDate2 = inputtext.indexOf("D[");	// not going to work
-	int rightInputDate2 = inputtext.indexOf("]");
-	String inputDate2 = inputtext.substring(leftInputDate2+1, rightInputDate2);
-	String localInputDate2 = localiesDate(inputFormat, outputFormat, inputDate2);
 	
-	int leftInputCurrency = inputtext.indexOf("C[");
-	int rightInputCurrency = inputtext.indexOf("]");
-	String inputCurrencyString = inputtext.substring(leftInputCurrency+1, rightInputCurrency);
-	double inputCurrency = Double.parseDouble(inputCurrencyString);
+	
+	String inputDate = "Example";		// replace with real one
+	String localInputDate = localiesDate(inputFormat, outputFormat, inputDate);
+	
+	String outputDate = "Example";		// replace with real one
+	String localOutputDate = localiesDate(inputFormat, outputFormat, outputDate);
+	
+	double inputCurrency = 1000.00;		// replace with real one
 	String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
 	
-	String localisedValues = localInputDate1 + " " + localInputDate2 + " " + localCurrency;
+	String localisedValues = localInputDate + localOutputDate + localCurrency;		
+	// not correct need to create a new text file
 	
 	return localisedValues;
 }}
