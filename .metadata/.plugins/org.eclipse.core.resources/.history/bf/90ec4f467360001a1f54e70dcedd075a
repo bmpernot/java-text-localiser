@@ -139,6 +139,8 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	return localisedDate;
 }
 
+//Completed up to this point
+
 @Override
 public void loadCurrencyFormats(Map<String, String> currencyformats) {
 	//		currencyformats = new HashMap<String, String>(); // might not need this line
@@ -195,23 +197,21 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	return localisedCurrency;
 }
 
-//Completed up to this point
-
 @Override
 public String localise(String inputFormat, String outputFormat, String inputtext) {
 	
 	// 	need to read through text file String to find inputDates D[xx/xx/xx] and inputCurrency C[£xx.xx]
 	//	for date i might need to do it twice for brought and delivered dates, use a while loop
 	
-	String inputDate = "Example";		// replace with real one
-	String localInputDate = localiesDate(inputFormat, outputFormat, inputDate);
 	
-	String outputDate = "Example";		// replace with real one
-	String localOutputDate = localiesDate(inputFormat, outputFormat, outputDate);
 	
-	double inputCurrency = 1000.00;		// replace with real one
+	String inputDate = "Example";
+	String localDate = localiesDate(inputFormat, outputFormat, inputDate);
+	
+	double inputCurrency = 1000.00;
 	String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
 	
-	String localisedValues = localInputDate + localOutputDate + localCurrency;		// not correct need to create a new text file
+	
+	String localisedValues = localDate + localCurrency;		// not correct need to create a new text file
 	return localisedValues;
 }}

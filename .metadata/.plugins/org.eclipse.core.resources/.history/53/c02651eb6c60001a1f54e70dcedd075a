@@ -139,63 +139,78 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	return localisedDate;
 }
 
+//Completed up to this point
+
 @Override
 public void loadCurrencyFormats(Map<String, String> currencyformats) {
 	//		currencyformats = new HashMap<String, String>(); // might not need this line
-	currencyformats.put("US", "$");	
-	currencyformats.put("UK", "£");
-	currencyformats.put("DE", "€");
+	currencyformats.put("US", "en_US");	
+	currencyformats.put("UK", "en_GB");
+	currencyformats.put("DE", "de_DE");
+	// en_US, en_GB and de_DE mean to change all currency symbols from input to the correct output
 }
 
 @Override
 public String localiseCurrency(String inputFormat, String outputFormat, double inputText) {
 	
-	double exchangeRate = 0;
-	Map<String, Double> exchangeRates = new HashMap<String, Double>();
+	double exchangeRate = 0;		// find a way to allow for more currencies to be added
 	
-	exchangeRates.put("UK-DE", 1.15);
-	exchangeRates.put("UK-US", 1.30);
 	
-	exchangeRates.put("US-UK", 0.77);
-	exchangeRates.put("US-DE", 0.88);
+	if (inputFormat.equals("UK")) {
+		if (outputFormat.equals("DE")) {
+			exchangeRate = 1.15;
+		}
+		else if (outputFormat.equals("US")) {
+			exchangeRate = 1.30;
+		}
+		else {
+			exchangeRate = 1;
+		}
+	}
+	else if (inputFormat.equals("US")) {
+		if (outputFormat.equals("DE")) {
+			exchangeRate = 0.88;
+		}
+		else if (outputFormat.equals("UK")) {
+			exchangeRate = 0.77;
+		}
+		else {
+			exchangeRate = 1;
+		}
+	}
+	else if (inputFormat.equals("DE")) {
+		if (outputFormat.equals("UK")) {
+			exchangeRate = 0.87;
+		}
+		else if (outputFormat.equals("US")) {
+			exchangeRate = 1.13;
+		}
+		else {
+			exchangeRate = 1;
+		}
+	}
+	else {
+		exchangeRate = 1;
+		}
 	
-	exchangeRates.put("DE-UK", 0.87);
-	exchangeRates.put("DE-US", 1.13);
-	
-	String key = inputFormat + "-" + outputFormat;
-	exchangeRate = exchangeRates.get(key);
-
 	double finalValue = inputText*exchangeRate;
-	
-	
 	String localisedCurrency = null;
 	
-	Map<String, String> location = new HashMap<String, String>();
-	location.put("£", "pre");
-	location.put("$", "pre");
-	location.put("€", "post");
-
-	Map<String, String> symbolMap = new HashMap<String, String>();
-	loadCurrencyFormats(symbolMap);
-	
-	String symbol = symbolMap.get(inputFormat);
-	
-	String position = location.get(symbol);
-	
-	if (position.equals("pre")) {
-		localisedCurrency = symbol + Double.toString(finalValue);
+	if (inputFormat.equals("UK")) {
+		localisedCurrency = "£" + Double.toString(finalValue);
 	}
-	
-	else if (position.equals("post")) {
-		localisedCurrency = Double.toString(finalValue) + symbol;
+	else if (inputFormat.equals("US")) {
+		localisedCurrency = "$" + Double.toString(finalValue);
+		}
+	else if (inputFormat.equals("DE")) {
+		localisedCurrency = Double.toString(finalValue) + "€";
+		}
+	else {
+		localisedCurrency = Double.toString(finalValue);
 	}
-	
-	else {}
 	
 	return localisedCurrency;
 }
-
-//Completed up to this point
 
 @Override
 public String localise(String inputFormat, String outputFormat, String inputtext) {
@@ -203,15 +218,15 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	// 	need to read through text file String to find inputDates D[xx/xx/xx] and inputCurrency C[£xx.xx]
 	//	for date i might need to do it twice for brought and delivered dates, use a while loop
 	
-	String inputDate = "Example";		// replace with real one
-	String localInputDate = localiesDate(inputFormat, outputFormat, inputDate);
 	
-	String outputDate = "Example";		// replace with real one
-	String localOutputDate = localiesDate(inputFormat, outputFormat, outputDate);
 	
-	double inputCurrency = 1000.00;		// replace with real one
+	String inputDate = "Example";
+	String localDate = localiesDate(inputFormat, outputFormat, inputDate);
+	
+	double inputCurrency = 1000.00;
 	String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
 	
-	String localisedValues = localInputDate + localOutputDate + localCurrency;		// not correct need to create a new text file
+	
+	String localisedValues = localDate + localCurrency;		// not correct need to create a new text file
 	return localisedValues;
 }}
