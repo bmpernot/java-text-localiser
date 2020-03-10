@@ -224,13 +224,13 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	Matcher dateMatch = datePattern.matcher(inputtext);
 	
 	String dateText = null;
-	ArrayList<String> dateArray = new ArrayList<String>();
+	String dateArray[] = null;
 	
 	while (dateMatch.find()) {
 		dateText = dateMatch.toString();
 		dateText = dateText.substring(2, (dateText.length()-1));
 		String localDate = localiesDate(inputFormat, outputFormat, dateText);
-		dateArray.add(localDate);
+		dateArray[] = ;
 	}
 	
 	
