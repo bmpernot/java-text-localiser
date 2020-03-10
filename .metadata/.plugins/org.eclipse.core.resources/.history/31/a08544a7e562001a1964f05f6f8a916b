@@ -204,8 +204,6 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 @Override
 public String localise(String inputFormat, String outputFormat, String inputtext) {
 	
-	
-	
 	int leftInputDate1 = inputtext.indexOf("D[");
 	int rightInputDate1 = inputtext.indexOf("]");
 	String inputDate1 = inputtext.substring(leftInputDate1+1, rightInputDate1);
@@ -219,8 +217,6 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	int leftInputCurrency = inputtext.indexOf("C[");
 	int rightInputCurrency = inputtext.indexOf("]");
 	String inputCurrencyString = null;
-	
-	//all good below
 	
 	Map<String, String> location = new HashMap<String, String>();
 	loadCurrencySymbolsLocation(location);

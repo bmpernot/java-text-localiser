@@ -39,14 +39,7 @@ public static void main (String [] args) {
 	String outputCountry = "UK";	// for example text file
 	MyConverter.localise(inputCountry, outputCountry, inputText);
 }
-
-
-public void loadCurrencySymbolsLocation(Map<String, String> location) {
-	//		location = new HashMap<String, String>();	// might not need this line
-	location.put("£", "pre");
-	location.put("$", "pre");
-	location.put("€", "post");
-}
+	
 
 public boolean isDigit(String character) {
 	if ("0123456789".contains(character)) {
@@ -177,7 +170,9 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	String localisedCurrency = null;
 	
 	Map<String, String> location = new HashMap<String, String>();
-	loadCurrencySymbolsLocation(location);
+	location.put("£", "pre");
+	location.put("$", "pre");
+	location.put("€", "post");
 
 	Map<String, String> symbolMap = new HashMap<String, String>();
 	loadCurrencyFormats(symbolMap);
@@ -204,8 +199,6 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 @Override
 public String localise(String inputFormat, String outputFormat, String inputtext) {
 	
-	
-	
 	int leftInputDate1 = inputtext.indexOf("D[");
 	int rightInputDate1 = inputtext.indexOf("]");
 	String inputDate1 = inputtext.substring(leftInputDate1+1, rightInputDate1);
@@ -218,24 +211,7 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	
 	int leftInputCurrency = inputtext.indexOf("C[");
 	int rightInputCurrency = inputtext.indexOf("]");
-	String inputCurrencyString = null;
-	
-	//all good below
-	
-	Map<String, String> location = new HashMap<String, String>();
-	loadCurrencySymbolsLocation(location);
-	String position = location.get(inputFormat);
-	
-	if (position.equals("pre")) {
-		inputCurrencyString = inputtext.substring(leftInputCurrency+2, rightInputCurrency);;
-	}
-	
-	else if (position.equals("post")) {
-		inputCurrencyString = inputtext.substring(leftInputCurrency+1, rightInputCurrency-1);;
-	}
-	
-	else {}
-	
+	String inputCurrencyString = inputtext.substring(leftInputCurrency+1, rightInputCurrency);
 	double inputCurrency = Double.parseDouble(inputCurrencyString);
 	String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
 	
