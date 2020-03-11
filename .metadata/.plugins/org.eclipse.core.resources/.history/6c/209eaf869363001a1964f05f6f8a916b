@@ -223,6 +223,8 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	String localDate1 = dateArray.get(0);
 	String localDate2 = dateArray.get(1);
 	
+	//all good below
+	
 	String regularExpressionCurrency = "C[*]";
 	Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
     Matcher currencyMatch = currencyPattern.matcher(inputtext);
