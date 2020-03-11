@@ -17,7 +17,7 @@ public static void main (String [] args) {
 	
 	ArrayList<String> fileLines = new ArrayList<String>();
 	try {
-		File inputFile = new File(args[1]);
+		File inputFile = new File("sampleFile.txt");
 		Scanner myReader = new Scanner(inputFile);
 		
 		
@@ -84,9 +84,9 @@ public static void main (String [] args) {
 	String outputTextArray [] = inputText.split("   ");
 	
 	try {
-	      File outputWriter = new File(args[3]);
+	      File outputWriter = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
 	      if (outputWriter.createNewFile()) {
-	    	  FileWriter myWriter = new FileWriter(args[3]);
+	    	  FileWriter myWriter = new FileWriter("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
 	    	  int z = 0;
 	    	  while (z <= outputTextArray.length) {
 	    			  myWriter.write(outputTextArray[z]);
