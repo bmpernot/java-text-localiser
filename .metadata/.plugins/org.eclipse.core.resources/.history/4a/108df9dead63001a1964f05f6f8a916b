@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.*;
-import java.io.IOException;
-import java.io.FileWriter;
 
 public class MyTextLocaliser implements TextLocaliser {
 	
@@ -80,29 +78,7 @@ public static void main (String [] args) {
 		currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 	}
 	
-	String outputTextArray [] = inputText.split("   ");
 	
-	try {
-	      File outputWriter = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
-	      if (outputWriter.createNewFile()) {
-	    	  FileWriter myWriter = new FileWriter("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
-	    	  int z = 0;
-	    	  while (z <= outputTextArray.length) {
-	    			  myWriter.write(outputTextArray[z]);
-	    			  myWriter.write("/n");
-	    			  z++;
-	    	  }
-	          myWriter.close();
-	      } 
-	      
-	      else {
-	        System.out.println("File already exists.");
-	      }
-	    }
-	catch (IOException e) {
-	      System.out.println("An error occurred.");
-	      e.printStackTrace();
-	    }
 	
 }
 

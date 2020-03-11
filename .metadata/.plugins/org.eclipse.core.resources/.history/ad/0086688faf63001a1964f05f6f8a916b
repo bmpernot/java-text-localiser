@@ -80,18 +80,13 @@ public static void main (String [] args) {
 		currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 	}
 	
-	String outputTextArray [] = inputText.split("   ");
-	
 	try {
-	      File outputWriter = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
+	      File outputWriter = new File("sampleFileOutput.txt");
 	      if (outputWriter.createNewFile()) {
-	    	  FileWriter myWriter = new FileWriter("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
-	    	  int z = 0;
-	    	  while (z <= outputTextArray.length) {
-	    			  myWriter.write(outputTextArray[z]);
-	    			  myWriter.write("/n");
-	    			  z++;
-	    	  }
+	    	  FileWriter myWriter = new FileWriter("sampleFileOutput.txt");
+	    	  
+	          myWriter.write(inputText);
+	          
 	          myWriter.close();
 	      } 
 	      

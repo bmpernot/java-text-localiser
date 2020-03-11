@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.*;
-import java.io.IOException;
-import java.io.FileWriter;
 
 public class MyTextLocaliser implements TextLocaliser {
 	
@@ -35,7 +33,7 @@ public static void main (String [] args) {
 	String inputText = null;
 	int n = 0;
 	while (n < fileLines.size())
-		inputText = inputText + "   " + fileLines.get(n);
+		inputText = inputText + " " + fileLines.get(n);
 		n++;
 
 	String inputCountry = "US";		// for example text file
@@ -45,9 +43,9 @@ public static void main (String [] args) {
 	String localisedValuesArray [] = localisedValues.split(" ");
 	String localDate1 = localisedValuesArray[0];
 	String localDate2 = localisedValuesArray[1];
-	String localCurrency1 = localisedValuesArray[2];
+	String localCurrency = localisedValuesArray[2];
 	
-	String regularExpressionDate = "D[*]";
+	String regularExpressionDate= "D[*]";
 	Pattern datePattern = Pattern.compile(regularExpressionDate);
 	Matcher dateMatch = datePattern.matcher(inputText);
 	
@@ -64,45 +62,7 @@ public static void main (String [] args) {
 		dateMatch.appendReplacement(stringBufferDate, dateText);
 	}
 	
-	String regularExpressionCurrency = "C[*]";
-	Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
-	Matcher currencyMatch = currencyPattern.matcher(inputText);
 	
-	String currencyText = null;
-	int y = 1;
-	ArrayList<String> localCurrencyArray = new ArrayList<String>();
-	localCurrencyArray.add(localCurrency1);
-	StringBuffer stringBufferCurrency = new StringBuffer();
-	
-	while (dateMatch.find()) {
-		currencyText = "C[" + localDateArray.get(y) + "]";
-		y++;
-		currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
-	}
-	
-	String outputTextArray [] = inputText.split("   ");
-	
-	try {
-	      File outputWriter = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
-	      if (outputWriter.createNewFile()) {
-	    	  FileWriter myWriter = new FileWriter("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
-	    	  int z = 0;
-	    	  while (z <= outputTextArray.length) {
-	    			  myWriter.write(outputTextArray[z]);
-	    			  myWriter.write("/n");
-	    			  z++;
-	    	  }
-	          myWriter.close();
-	      } 
-	      
-	      else {
-	        System.out.println("File already exists.");
-	      }
-	    }
-	catch (IOException e) {
-	      System.out.println("An error occurred.");
-	      e.printStackTrace();
-	    }
 	
 }
 

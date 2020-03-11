@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.*;
-import java.io.IOException;
-import java.io.FileWriter;
 
 public class MyTextLocaliser implements TextLocaliser {
 	
@@ -35,76 +33,14 @@ public static void main (String [] args) {
 	String inputText = null;
 	int n = 0;
 	while (n < fileLines.size())
-		inputText = inputText + "   " + fileLines.get(n);
+		inputText = inputText + " " + fileLines.get(n);
 		n++;
 
 	String inputCountry = "US";		// for example text file
 	String outputCountry = "UK";	// for example text file
-	String localisedValues = MyConverter.localise(inputCountry, outputCountry, inputText);
-	
-	String localisedValuesArray [] = localisedValues.split(" ");
-	String localDate1 = localisedValuesArray[0];
-	String localDate2 = localisedValuesArray[1];
-	String localCurrency1 = localisedValuesArray[2];
-	
-	String regularExpressionDate = "D[*]";
-	Pattern datePattern = Pattern.compile(regularExpressionDate);
-	Matcher dateMatch = datePattern.matcher(inputText);
-	
-	String dateText = null;
-	int x = 1;
-	ArrayList<String> localDateArray = new ArrayList<String>();
-	localDateArray.add(localDate1);
-	localDateArray.add(localDate2);
-	StringBuffer stringBufferDate = new StringBuffer();
-	
-	while (dateMatch.find()) {
-		dateText = "D[" + localDateArray.get(x) + "]";
-		x++;
-		dateMatch.appendReplacement(stringBufferDate, dateText);
-	}
-	
-	String regularExpressionCurrency = "C[*]";
-	Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
-	Matcher currencyMatch = currencyPattern.matcher(inputText);
-	
-	String currencyText = null;
-	int y = 1;
-	ArrayList<String> localCurrencyArray = new ArrayList<String>();
-	localCurrencyArray.add(localCurrency1);
-	StringBuffer stringBufferCurrency = new StringBuffer();
-	
-	while (dateMatch.find()) {
-		currencyText = "C[" + localDateArray.get(y) + "]";
-		y++;
-		currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
-	}
-	
-	String outputTextArray [] = inputText.split("   ");
-	
-	try {
-	      File outputWriter = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
-	      if (outputWriter.createNewFile()) {
-	    	  FileWriter myWriter = new FileWriter("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFileOutput.txt");
-	    	  int z = 0;
-	    	  while (z <= outputTextArray.length) {
-	    			  myWriter.write(outputTextArray[z]);
-	    			  myWriter.write("/n");
-	    			  z++;
-	    	  }
-	          myWriter.close();
-	      } 
-	      
-	      else {
-	        System.out.println("File already exists.");
-	      }
-	    }
-	catch (IOException e) {
-	      System.out.println("An error occurred.");
-	      e.printStackTrace();
-	    }
-	
+	MyConverter.localise(inputCountry, outputCountry, inputText);
 }
+
 
 public void loadCurrencySymbolsLocation(Map<String, String> location) {
 	//		location = new HashMap<String, String>();	// might not need this line
@@ -263,6 +199,8 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	
 	return localisedCurrency;
 }
+
+	//Completed up to this point
 
 @Override
 public String localise(String inputFormat, String outputFormat, String inputtext) {
