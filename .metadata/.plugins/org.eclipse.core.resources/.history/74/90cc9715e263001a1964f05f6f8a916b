@@ -286,6 +286,8 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	
 	localisedDateValues = numberOfDates + localisedDateValues;
 	
+	//done up till here in this method//
+	
 	String localisedCurrencyValues = null;
 	int numberOfCurrencies = 1;
 	

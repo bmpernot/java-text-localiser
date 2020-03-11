@@ -267,33 +267,33 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 @Override
 public String localise(String inputFormat, String outputFormat, String inputtext) {
 	
-	String localisedDateValues = null;
-	int numberOfDates = 1;
+	String localisedValues = null;
 	
 	String regularExpressionDate= "D[*]";
 	Pattern datePattern = Pattern.compile(regularExpressionDate);
 	Matcher dateMatch = datePattern.matcher(inputtext);
 	
 	String dateText = null;
+	int numberOfDates = 1;
 	
 	while (dateMatch.find()) {
 		dateText = dateMatch.toString();
 		dateText = dateText.substring(2, (dateText.length()-1));
 		String localDate = localiesDate(inputFormat, outputFormat, dateText);
-		localisedDateValues = localisedDateValues + localDate + " ";
+		localisedValues = localisedValues + localDate + " ";
 		numberOfDates++;
 	}
 	
-	localisedDateValues = numberOfDates + localisedDateValues;
+	localisedValues = numberOfDates + localisedValues;
 	
-	String localisedCurrencyValues = null;
-	int numberOfCurrencies = 1;
+	//done up till here in this method
 	
 	String regularExpressionCurrency = "C[*]";
 	Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
     Matcher currencyMatch = currencyPattern.matcher(inputtext);
     
     String currencyText = null;
+    String localCurrency = null;
     
     while (currencyMatch.find()) {
     	
@@ -306,24 +306,18 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     	if (position.equals("pre")) {
     		currencyText = currencyText.substring(1, currencyText.length());;
     		double inputCurrency = Double.parseDouble(currencyText);
-    		String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
-    		localisedCurrencyValues = localisedCurrencyValues + localCurrency + " ";
+    		localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
     	}
     	
     	else if (position.equals("post")) {
     		currencyText = currencyText.substring(0, (currencyText.length()-1));
     		double inputCurrency = Double.parseDouble(currencyText);
-    		String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
-    		localisedCurrencyValues = localisedCurrencyValues + localCurrency + " ";
+    		localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
     	}
     	
     	else {}
     }
-    
-    localisedCurrencyValues = numberOfCurrencies + localisedCurrencyValues;
 	
-    String localisedValues = localisedDateValues + localisedCurrencyValues;
-    
 	return localisedValues;
 }
 }

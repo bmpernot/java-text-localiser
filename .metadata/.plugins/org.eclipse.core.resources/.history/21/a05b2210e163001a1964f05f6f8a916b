@@ -268,13 +268,13 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 public String localise(String inputFormat, String outputFormat, String inputtext) {
 	
 	String localisedDateValues = null;
-	int numberOfDates = 1;
 	
 	String regularExpressionDate= "D[*]";
 	Pattern datePattern = Pattern.compile(regularExpressionDate);
 	Matcher dateMatch = datePattern.matcher(inputtext);
 	
 	String dateText = null;
+	int numberOfDates = 1;
 	
 	while (dateMatch.find()) {
 		dateText = dateMatch.toString();
@@ -286,14 +286,16 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	
 	localisedDateValues = numberOfDates + localisedDateValues;
 	
+	//done up till here in this method//
+	
 	String localisedCurrencyValues = null;
-	int numberOfCurrencies = 1;
 	
 	String regularExpressionCurrency = "C[*]";
 	Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
     Matcher currencyMatch = currencyPattern.matcher(inputtext);
     
     String currencyText = null;
+    String localCurrency = null;
     
     while (currencyMatch.find()) {
     	
@@ -306,21 +308,17 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     	if (position.equals("pre")) {
     		currencyText = currencyText.substring(1, currencyText.length());;
     		double inputCurrency = Double.parseDouble(currencyText);
-    		String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
-    		localisedCurrencyValues = localisedCurrencyValues + localCurrency + " ";
+    		localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
     	}
     	
     	else if (position.equals("post")) {
     		currencyText = currencyText.substring(0, (currencyText.length()-1));
     		double inputCurrency = Double.parseDouble(currencyText);
-    		String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
-    		localisedCurrencyValues = localisedCurrencyValues + localCurrency + " ";
+    		localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
     	}
     	
     	else {}
     }
-    
-    localisedCurrencyValues = numberOfCurrencies + localisedCurrencyValues;
 	
     String localisedValues = localisedDateValues + localisedCurrencyValues;
     
