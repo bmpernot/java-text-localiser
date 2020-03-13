@@ -37,7 +37,7 @@ public static void main (String [] args) {
 	
 	ArrayList<String> fileLines = new ArrayList<String>();
 	try {
-		File inputFile = new File(args[0]);			// not going to work
+		File inputFile = new File(args[0]);
 		Scanner myReader = new Scanner(inputFile);
 		
 		while (myReader.hasNextLine()) {

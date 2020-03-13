@@ -23,21 +23,15 @@ public static void main (String [] args) {
     String outputCountry = userInput.nextLine(); 
     
     System.out.println("Please enter the output text file's name");
-    String outputFileName = userInput.nextLine(); 
-    
-    System.out.println("Please enter the output text file's location");
-    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
     String outputFileLocation = userInput.nextLine(); 
     
     userInput.close();
-    
-    String outputFile = outputFileLocation + "\\" + outputFileName;
 	
 	TextLocaliser MyConverter = new MyTextLocaliser();
 	
 	ArrayList<String> fileLines = new ArrayList<String>();
 	try {
-		File inputFile = new File(args[0]);			// not going to work
+		File inputFile = new File(args[0]);
 		Scanner myReader = new Scanner(inputFile);
 		
 		while (myReader.hasNextLine()) {
@@ -101,9 +95,9 @@ public static void main (String [] args) {
 	String outputTextArray [] = inputText.split("   ");
 	
 	try {
-	      File outputWriter = new File(outputFile);
+	      File outputWriter = new File(outputFileLocation);
 	      if (outputWriter.createNewFile()) {
-	    	  FileWriter myWriter = new FileWriter(outputFile);
+	    	  FileWriter myWriter = new FileWriter(outputFileLocation);
 	    	  int z = 0;
 	    	  while (z <= outputTextArray.length) {
 	    			  myWriter.write(outputTextArray[z]);
@@ -121,6 +115,7 @@ public static void main (String [] args) {
 	      System.out.println("An error occurred.");
 	      e.printStackTrace();
 	    }
+	
 }
 
 public void loadCurrencySymbolsLocation(Map<String, String> location) {

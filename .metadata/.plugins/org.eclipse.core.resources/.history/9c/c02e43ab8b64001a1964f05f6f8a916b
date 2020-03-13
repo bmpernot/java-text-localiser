@@ -16,29 +16,27 @@ public static void main (String [] args) {
 	
 	Scanner userInput = new Scanner(System.in);
 	
-    System.out.println("Pleae enter the country format the file is in: (UK, US, DE)");
+    System.out.println("Enter username");
     String inputCountry = userInput.nextLine(); 
     
-    System.out.println("Pleae enter the country format that you want the output file to be in: (UK, US, DE)");
+    System.out.println("Enter username");
+    String inputFileLocation = userInput.nextLine(); 
+    
+    System.out.println("Enter username");
     String outputCountry = userInput.nextLine(); 
     
-    System.out.println("Please enter the output text file's name");
-    String outputFileName = userInput.nextLine(); 
-    
-    System.out.println("Please enter the output text file's location");
-    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
+    System.out.println("Enter username");
     String outputFileLocation = userInput.nextLine(); 
     
     userInput.close();
-    
-    String outputFile = outputFileLocation + "\\" + outputFileName;
 	
 	TextLocaliser MyConverter = new MyTextLocaliser();
 	
 	ArrayList<String> fileLines = new ArrayList<String>();
 	try {
-		File inputFile = new File(args[0]);			// not going to work
+		File inputFile = new File(inputFile);		// find out why
 		Scanner myReader = new Scanner(inputFile);
+		
 		
 		while (myReader.hasNextLine()) {
 			String FileText = myReader.nextLine();
@@ -101,9 +99,9 @@ public static void main (String [] args) {
 	String outputTextArray [] = inputText.split("   ");
 	
 	try {
-	      File outputWriter = new File(outputFile);
+	      File outputWriter = new File(outputFileLocation);
 	      if (outputWriter.createNewFile()) {
-	    	  FileWriter myWriter = new FileWriter(outputFile);
+	    	  FileWriter myWriter = new FileWriter(outputFileLocation);
 	    	  int z = 0;
 	    	  while (z <= outputTextArray.length) {
 	    			  myWriter.write(outputTextArray[z]);
@@ -121,6 +119,7 @@ public static void main (String [] args) {
 	      System.out.println("An error occurred.");
 	      e.printStackTrace();
 	    }
+	
 }
 
 public void loadCurrencySymbolsLocation(Map<String, String> location) {
