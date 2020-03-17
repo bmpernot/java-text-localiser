@@ -22,10 +22,10 @@ public static void main (String [] args) {
     System.out.println("Pleae enter the country format that you want the output file to be in: (UK, US, DE)");
     String outputCountry = userInput.nextLine(); 
     
-    System.out.println("Please enter the output text file's name");
+    System.out.println("Please enter the output text file's name:");
     String outputFileName = userInput.nextLine(); 
     
-    System.out.println("Please enter the output text file's location");
+    System.out.println("Please enter the output text file's location:");
     System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
     String outputFileLocation = userInput.nextLine(); 
     
