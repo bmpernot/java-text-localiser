@@ -37,7 +37,8 @@ public static void main (String [] args) {
 	
 	ArrayList<String> fileLines = new ArrayList<String>();
 	try {
-		File inputFile = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFile.txt");			// not going to work
+		File inputFile = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFile.txt");	
+				// not going to work as the user can not say what file to read
 		Scanner myReader = new Scanner(inputFile);
 		
 		while (myReader.hasNextLine()) {
@@ -61,19 +62,23 @@ public static void main (String [] args) {
 	String localisedValues = MyConverter.localise(inputCountry, outputCountry, inputText);
 	
 	String localisedValuesArray [] = localisedValues.split(" ");
-	String localDate1 = localisedValuesArray[0];
-	String localDate2 = localisedValuesArray[1];
-	String localCurrency1 = localisedValuesArray[2];
+	
+	String numberOfDates = localisedValuesArray[0];
 	
 	String regularExpressionDate = "D[*]";
 	Pattern datePattern = Pattern.compile(regularExpressionDate);
 	Matcher dateMatch = datePattern.matcher(inputText);
 	
 	String dateText = null;
-	int x = 1;
+	int x = 0;
+	int w = 1;
 	ArrayList<String> localDateArray = new ArrayList<String>();
-	localDateArray.add(localDate1);
-	localDateArray.add(localDate2);
+	
+	while (w <= Integer.parseInt(numberOfDates)) {
+		localDateArray.add(localisedValuesArray[w]);
+		w++;
+	}
+	
 	StringBuffer stringBufferDate = new StringBuffer();
 	
 	while (dateMatch.find()) {
@@ -82,14 +87,22 @@ public static void main (String [] args) {
 		dateMatch.appendReplacement(stringBufferDate, dateText);
 	}
 	
+	int numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);
+	
 	String regularExpressionCurrency = "C[*]";
 	Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
 	Matcher currencyMatch = currencyPattern.matcher(inputText);
 	
 	String currencyText = null;
 	int y = 1;
+	int v = w + 2;
 	ArrayList<String> localCurrencyArray = new ArrayList<String>();
-	localCurrencyArray.add(localCurrency1);
+	
+	while (y <= numberOfCurrency) {
+		localCurrencyArray.add(localisedValuesArray[v]);
+		y++;
+	}
+	
 	StringBuffer stringBufferCurrency = new StringBuffer();
 	
 	while (dateMatch.find()) {
@@ -122,6 +135,7 @@ public static void main (String [] args) {
 	      e.printStackTrace();
 	    }
 }
+
 
 public void loadCurrencySymbolsLocation(Map<String, String> location) {
 	//		location = new HashMap<String, String>();	// might not need this line
@@ -285,9 +299,9 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 public String localise(String inputFormat, String outputFormat, String inputtext) {
 	
 	String localisedDateValues = null;
-	int numberOfDates = 1;
+	int numberOfDates = 0;
 	
-	String regularExpressionDate= "D[*]";
+	String regularExpressionDate = "D[*]";
 	Pattern datePattern = Pattern.compile(regularExpressionDate);
 	Matcher dateMatch = datePattern.matcher(inputtext);
 	
@@ -297,14 +311,14 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 		dateText = dateMatch.toString();
 		dateText = dateText.substring(2, (dateText.length()-1));
 		String localDate = localiesDate(inputFormat, outputFormat, dateText);
-		localisedDateValues = localisedDateValues + localDate + " ";
+		localisedDateValues = localisedDateValues + " " + localDate;
 		numberOfDates++;
 	}
 	
 	localisedDateValues = numberOfDates + localisedDateValues;
 	
 	String localisedCurrencyValues = null;
-	int numberOfCurrencies = 1;
+	int numberOfCurrencies = 0;
 	
 	String regularExpressionCurrency = "C[*]";
 	Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
@@ -321,25 +335,24 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     	String position = location.get(inputFormat);
     	
     	if (position.equals("pre")) {
-    		currencyText = currencyText.substring(1, currencyText.length());;
-    		double inputCurrency = Double.parseDouble(currencyText);
-    		String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
-    		localisedCurrencyValues = localisedCurrencyValues + localCurrency + " ";
+    		currencyText = currencyText.substring(1, currencyText.length());
     	}
     	
     	else if (position.equals("post")) {
     		currencyText = currencyText.substring(0, (currencyText.length()-1));
-    		double inputCurrency = Double.parseDouble(currencyText);
-    		String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
-    		localisedCurrencyValues = localisedCurrencyValues + localCurrency + " ";
     	}
     	
     	else {}
+    	
+    	double inputCurrency = Double.parseDouble(currencyText);
+		String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
+		localisedCurrencyValues = localisedCurrencyValues + " " + localCurrency;
+    	
     }
     
     localisedCurrencyValues = numberOfCurrencies + localisedCurrencyValues;
 	
-    String localisedValues = localisedDateValues + localisedCurrencyValues;
+    String localisedValues = localisedDateValues + " " + localisedCurrencyValues;
     
 	return localisedValues;
 }
