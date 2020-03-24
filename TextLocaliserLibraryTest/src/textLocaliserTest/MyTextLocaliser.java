@@ -94,6 +94,7 @@ public static void main (String [] args) {
 	Matcher currencyMatch = currencyPattern.matcher(inputText);
 	
 	String currencyText = null;
+	
 	int y = 1;
 	int v = w + 2;
 	ArrayList<String> localCurrencyArray = new ArrayList<String>();
@@ -206,18 +207,20 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	
 	Map<String, String> inputMap = new HashMap<String, String>();
 	loadDateFormats(inputMap);
+	
 	String inputDateFormat = inputMap.get(inputFormat);
 	String inputFormatDelimiterValue = findDelimiter(inputDateFormat);
 	String inputFormatDateFields[] = inputText.split(inputFormatDelimiterValue);
 	
 	Map<String, String> outputMap = new HashMap<String, String>();
 	loadDateFormats(outputMap);
-	String outputDateFormat = outputMap.get(inputFormat);
+	
+	String outputDateFormat = outputMap.get(outputFormat);
 	String outputFormatDelimiterValue = findDelimiter(outputDateFormat);
 	String outputFormatDateFields[] = inputText.split(outputFormatDelimiterValue);
 	
-	
 	Map<String, String> convert = new HashMap<String, String>();
+	
 	for (int i = 0; i <= inputFormatDateFields.length; i++) {
 		convert.put(inputFormatDateFields[i], inputTextDateFields[i]);
 	}
@@ -238,6 +241,7 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	String localisedDate = convert.get(outputFormatDateFields[0]) + outputFormatDelimiterValue + 
 			convert.get(outputFormatDateFields[1]) + outputFormatDelimiterValue + 
 			convert.get(outputFormatDateFields[2]);
+	
 	return localisedDate;
 }
 
@@ -268,7 +272,6 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	exchangeRate = exchangeRates.get(key);
 
 	double finalValue = inputText*exchangeRate;
-	
 	
 	String localisedCurrency = null;
 	
