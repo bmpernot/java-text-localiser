@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import textLocaliserTest.MyTextLocaliser; // will need to change when put back into real application
 
 public class UserInterface {
 
@@ -32,12 +33,13 @@ public static void main (String [] args) {
 	    
 	    String outputFile = outputFileLocation + "\\" + outputFileName + ".txt";
 		
-		TextLocaliser MyConverter = new MyTextLocaliser();
 		
 		ArrayList<String> fileLines = new ArrayList<String>();
 		try {
+			
 			File inputFile = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFile.txt");	
 					// not going to work as the user can not say what file to read
+			
 			Scanner myReader = new Scanner(inputFile);
 			
 			while (myReader.hasNextLine()) {
@@ -57,6 +59,8 @@ public static void main (String [] args) {
 			inputText = inputText + "   " + fileLines.get(n);
 			n++;
 		}
+		
+		TextLocaliser MyConverter = new MyTextLocaliser();
 		
 		String localisedValues = MyConverter.localise(inputCountry, outputCountry, inputText);
 		
