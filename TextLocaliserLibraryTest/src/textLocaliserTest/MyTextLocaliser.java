@@ -7,8 +7,20 @@ import java.util.regex.Pattern;
 
 public class MyTextLocaliser implements TextLocaliser {
 
+public void loadCurrencyExchangeRate(Map<String, Double> exchangeRate) {
+
+	exchangeRate.put("UK-DE", 1.15);
+	exchangeRate.put("UK-US", 1.30);
+	
+	exchangeRate.put("US-UK", 0.77);
+	exchangeRate.put("US-DE", 0.88);
+	
+	exchangeRate.put("DE-UK", 0.87);
+	exchangeRate.put("DE-US", 1.13);
+}
+	
 public void loadCurrencySymbolsLocation(Map<String, String> location) {
-	//		location = new HashMap<String, String>();	// might not need this line
+
 	location.put("£", "pre");
 	location.put("$", "pre");
 	location.put("€", "post");
@@ -64,7 +76,7 @@ public int findIndexNumber(String array [], String value) {
 
 @Override
 public void loadDateFormats(Map<String, String> dateformats) {
-	//		dateformats = new HashMap<String, String>();	// might not need this line
+
 	dateformats.put("US", "mm/dd/yy");
 	dateformats.put("UK", "dd/mm/yyyy");
 	dateformats.put("DE", "yyyy-mm-dd");
@@ -74,21 +86,52 @@ public void loadDateFormats(Map<String, String> dateformats) {
 public String localiesDate(String inputFormat, String outputFormat, String inputText) {
 	
 	String inputTextDelimiterValue = findDelimiter(inputText);
+	
+	System.out.println("following string is the delimiter"); 	// DEBUG STATEMENT
+	System.out.println(inputTextDelimiterValue); 	// DEBUG STATEMENT
+	
 	String inputTextDateFields[] = inputText.split(inputTextDelimiterValue);
+	
+	System.out.println("following string is the split fields"); 	// DEBUG STATEMENT
+	System.out.println(inputTextDateFields); 	// DEBUG STATEMENT
 	
 	Map<String, String> inputMap = new HashMap<String, String>();
 	loadDateFormats(inputMap);
 	
 	String inputDateFormat = inputMap.get(inputFormat);
+	
+	System.out.println("following string is the input format"); 	// DEBUG STATEMENT
+	System.out.println(inputDateFormat); 	// DEBUG STATEMENT
+	
 	String inputFormatDelimiterValue = findDelimiter(inputDateFormat);
+	
+	System.out.println("following string is the delimiter"); 	// DEBUG STATEMENT
+	System.out.println(inputFormatDelimiterValue); 	// DEBUG STATEMENT
+	
 	String inputFormatDateFields[] = inputText.split(inputFormatDelimiterValue);
+	
+	System.out.println("following string is the split fields"); 	// DEBUG STATEMENT
+	System.out.println(inputFormatDateFields); 	// DEBUG STATEMENT
+	
 	
 	Map<String, String> outputMap = new HashMap<String, String>();
 	loadDateFormats(outputMap);
 	
 	String outputDateFormat = outputMap.get(outputFormat);
+	
+	System.out.println("following string is the output format"); 	// DEBUG STATEMENT
+	System.out.println(outputDateFormat); 	// DEBUG STATEMENT
+	
 	String outputFormatDelimiterValue = findDelimiter(outputDateFormat);
+	
+	System.out.println("following string is the delimiter"); 	// DEBUG STATEMENT
+	System.out.println(outputFormatDelimiterValue); 	// DEBUG STATEMENT
+	
 	String outputFormatDateFields[] = inputText.split(outputFormatDelimiterValue);
+	
+	System.out.println("following string is the split fields"); 	// DEBUG STATEMENT
+	System.out.println(outputFormatDateFields); 	// DEBUG STATEMENT
+	
 	
 	Map<String, String> convert = new HashMap<String, String>();
 	
@@ -97,28 +140,44 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	}
 	
 	int inputYear = findIndexNumber(inputFormatDateFields, "y");
+	
+	System.out.println("following interger is the input index number for years"); 	// DEBUG STATEMENT
+	System.out.println(inputYear); 	// DEBUG STATEMENT
+	
 	int outputYear = findIndexNumber(outputFormatDateFields, "y");
+	
+	System.out.println("following interger is the output index number for years"); 	// DEBUG STATEMENT
+	System.out.println(inputYear); 	// DEBUG STATEMENT
 	
 	if (outputFormatDateFields[outputYear] == inputFormatDateFields[inputYear]) {}
 	
 	else if (inputFormatDateFields[inputYear].equals("yy")) {
 		outputFormatDateFields[outputYear] = "20" + inputTextDateFields[inputYear];
+		
+		System.out.println("following interger is the final output for years"); 	// DEBUG STATEMENT
+		System.out.println(outputFormatDateFields[outputYear]); 	// DEBUG STATEMENT
 	}
 	
 	else {
 		outputFormatDateFields[outputYear] = inputTextDateFields[inputYear].substring(2);
+		
+		System.out.println("following interger is the final output for years"); 	// DEBUG STATEMENT
+		System.out.println(outputFormatDateFields[outputYear]); 	// DEBUG STATEMENT
 	}
 	
 	String localisedDate = convert.get(outputFormatDateFields[0]) + outputFormatDelimiterValue + 
 			convert.get(outputFormatDateFields[1]) + outputFormatDelimiterValue + 
 			convert.get(outputFormatDateFields[2]);
 	
+	System.out.println("following string is the final output"); 	// DEBUG STATEMENT
+	System.out.println(localisedDate); 	// DEBUG STATEMENT
+	
 	return localisedDate;
 }
 
 @Override
 public void loadCurrencyFormats(Map<String, String> currencyformats) {
-	//		currencyformats = new HashMap<String, String>(); // might not need this line
+
 	currencyformats.put("US", "$");	
 	currencyformats.put("UK", "£");
 	currencyformats.put("DE", "€");
@@ -127,24 +186,8 @@ public void loadCurrencyFormats(Map<String, String> currencyformats) {
 @Override
 public String localiseCurrency(String inputFormat, String outputFormat, double inputText) {
 	
-	double exchangeRate = 0;
 	Map<String, Double> exchangeRates = new HashMap<String, Double>();
-	
-	exchangeRates.put("UK-DE", 1.15);
-	exchangeRates.put("UK-US", 1.30);
-	
-	exchangeRates.put("US-UK", 0.77);
-	exchangeRates.put("US-DE", 0.88);
-	
-	exchangeRates.put("DE-UK", 0.87);
-	exchangeRates.put("DE-US", 1.13);
-	
-	String key = inputFormat + "-" + outputFormat;
-	exchangeRate = exchangeRates.get(key);
-
-	double finalValue = inputText*exchangeRate;
-	
-	String localisedCurrency = null;
+	loadCurrencyExchangeRate(exchangeRates);
 	
 	Map<String, String> location = new HashMap<String, String>();
 	loadCurrencySymbolsLocation(location);
@@ -152,16 +195,47 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	Map<String, String> symbolMap = new HashMap<String, String>();
 	loadCurrencyFormats(symbolMap);
 	
+	double exchangeRate = 0;
+	
+	String key = inputFormat + "-" + outputFormat;
+	
+	System.out.println("following string is the key to the map"); 	// DEBUG STATEMENT
+	System.out.println(key); 	// DEBUG STATEMENT
+	
+	exchangeRate = exchangeRates.get(key);
+	
+	System.out.println("following interger is the exchange rate"); 	// DEBUG STATEMENT
+	System.out.println(exchangeRate); 	// DEBUG STATEMENT
+
+	double finalValue = inputText*exchangeRate;
+	
+	System.out.println("following interger is the final value"); 	// DEBUG STATEMENT
+	System.out.println(finalValue); 	// DEBUG STATEMENT
+	
+	String localisedCurrency = null;
+	
 	String symbol = symbolMap.get(inputFormat);
+	
+	System.out.println("following string is the symbol"); 	// DEBUG STATEMENT
+	System.out.println(symbol); 	// DEBUG STATEMENT
 	
 	String position = location.get(symbol);
 	
+	System.out.println("following string is the position"); 	// DEBUG STATEMENT
+	System.out.println(position); 	// DEBUG STATEMENT
+	
 	if (position.equals("pre")) {
 		localisedCurrency = symbol + Double.toString(finalValue);
+		
+		System.out.println("following string is the final currency"); 	// DEBUG STATEMENT
+		System.out.println(localisedCurrency); 	// DEBUG STATEMENT
 	}
 	
 	else if (position.equals("post")) {
 		localisedCurrency = Double.toString(finalValue) + symbol;
+		
+		System.out.println("following string is the final currency"); 	// DEBUG STATEMENT
+		System.out.println(localisedCurrency); 	// DEBUG STATEMENT
 	}
 	
 	else {}
