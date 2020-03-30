@@ -183,13 +183,39 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	
 	while (dateMatch.find()) {
 		dateText = dateMatch.toString();
+		
+		System.out.println("following dates are in the input file"); 	// DEBUG STATEMENT
+		System.out.println(dateText); 	// DEBUG STATEMENT
+		
 		dateText = dateText.substring(2, (dateText.length()-1));
+		
+		System.out.println("following dates converted to the format * instead of D[*]"); 	// DEBUG STATEMENT
+		System.out.println(dateText); 	// DEBUG STATEMENT
+		
 		String localDate = localiesDate(inputFormat, outputFormat, dateText);
+		
+		System.out.println("following string is the converted value"); 	// DEBUG STATEMENT
+		System.out.println(localDate); 	// DEBUG STATEMENT
+		
 		localisedDateValues = localisedDateValues + " " + localDate;
+		
+		System.out.println("following string are the localised date values"); 	// DEBUG STATEMENT
+		System.out.println(localisedDateValues); 	// DEBUG STATEMENT
+		
 		numberOfDates++;
+		
+		System.out.println("following interger is the number of dates in the localisedDateValues string"); 	// DEBUG STATEMENT
+		System.out.println(numberOfDates); 	// DEBUG STATEMENT
 	}
 	
 	localisedDateValues = numberOfDates + localisedDateValues;
+	
+	System.out.println("following string is the number of dates followed by localisedDateValues"); 	// DEBUG STATEMENT
+	System.out.println(localisedDateValues); 	// DEBUG STATEMENT
+	
+	
+	// break //
+	
 	
 	String localisedCurrencyValues = null;
 	int numberOfCurrencies = 0;
@@ -209,24 +235,47 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     	String position = location.get(inputFormat);
     	
     	if (position.equals("pre")) {
-    		currencyText = currencyText.substring(1, currencyText.length());
+    		currencyText = currencyText.substring(3, currencyText.length()-1);
+    		
+    		System.out.println("following string is the currency without any symbols"); 	// DEBUG STATEMENT
+    		System.out.println(currencyText); 	// DEBUG STATEMENT
     	}
     	
     	else if (position.equals("post")) {
-    		currencyText = currencyText.substring(0, (currencyText.length()-1));
+    		currencyText = currencyText.substring(2, (currencyText.length()-2));
+    		
+    		System.out.println("following string is the currency without any symbols"); 	// DEBUG STATEMENT
+    		System.out.println(currencyText); 	// DEBUG STATEMENT
     	}
     	
     	else {}
     	
     	double inputCurrency = Double.parseDouble(currencyText);
+    	
+    	System.out.println("following double is the currency without any symbols"); 	// DEBUG STATEMENT
+		System.out.println(inputCurrency); 	// DEBUG STATEMENT
+		
 		String localCurrency = localiseCurrency(inputFormat, outputFormat, inputCurrency);
+		
+		System.out.println("following string is the localised currency"); 	// DEBUG STATEMENT
+		System.out.println(localCurrency); 	// DEBUG STATEMENT
+		
 		localisedCurrencyValues = localisedCurrencyValues + " " + localCurrency;
+		
+		System.out.println("following string is all the localised currency"); 	// DEBUG STATEMENT
+		System.out.println(localisedCurrencyValues); 	// DEBUG STATEMENT
     	
     }
     
     localisedCurrencyValues = numberOfCurrencies + localisedCurrencyValues;
+    
+    System.out.println("following string is the number of currencies followed by all the localised currency"); 	// DEBUG STATEMENT
+	System.out.println(localisedCurrencyValues); 	// DEBUG STATEMENT
 	
     String localisedValues = localisedDateValues + " " + localisedCurrencyValues;
+    
+    System.out.println("following string is all the localised values"); 	// DEBUG STATEMENT
+	System.out.println(localisedValues); 	// DEBUG STATEMENT
     
 	return localisedValues;
 }
