@@ -54,10 +54,10 @@ public static void main (String [] args) {
 		}
 		
 		String inputText = null;
-		int n = 0;
-		while (n < fileLines.size()) {
-			inputText = inputText + "   " + fileLines.get(n);
-			n++;
+		int fileLine = 0;
+		while (fileLine < fileLines.size()) {
+			inputText = inputText + "   " + fileLines.get(fileLine);
+			fileLine++;
 		}
 		
 		TextLocaliser MyConverter = new MyTextLocaliser();
@@ -73,20 +73,20 @@ public static void main (String [] args) {
 		Matcher dateMatch = datePattern.matcher(inputText);
 		
 		String dateText = null;
-		int x = 0;
-		int w = 1;
+		int dates = 0;
+		int startOfDates = 1;
 		ArrayList<String> localDateArray = new ArrayList<String>();
 		
-		while (w <= Integer.parseInt(numberOfDates)) {
-			localDateArray.add(localisedValuesArray[w]);
-			w++;
+		while (startOfDates <= Integer.parseInt(numberOfDates)) {
+			localDateArray.add(localisedValuesArray[startOfDates]);
+			startOfDates++;
 		}
 		
 		StringBuffer stringBufferDate = new StringBuffer();
 		
 		while (dateMatch.find()) {
-			dateText = "D[" + localDateArray.get(x) + "]";
-			x++;
+			dateText = "D[" + localDateArray.get(dates) + "]";
+			dates++;
 			dateMatch.appendReplacement(stringBufferDate, dateText);
 		}
 		
@@ -98,20 +98,20 @@ public static void main (String [] args) {
 		
 		String currencyText = null;
 		
-		int y = 1;
-		int v = w + 2;
+		int currencies = 1;
+		int startOfCurrencies = startOfDates + 2;
 		ArrayList<String> localCurrencyArray = new ArrayList<String>();
 		
-		while (y <= numberOfCurrency) {
-			localCurrencyArray.add(localisedValuesArray[v]);
-			y++;
+		while (currencies <= numberOfCurrency) {
+			localCurrencyArray.add(localisedValuesArray[startOfCurrencies]);
+			currencies++;
 		}
 		
 		StringBuffer stringBufferCurrency = new StringBuffer();
 		
 		while (dateMatch.find()) {
-			currencyText = "C[" + localDateArray.get(y) + "]";
-			y++;
+			currencyText = "C[" + localDateArray.get(currencies) + "]";
+			currencies++;
 			currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 		}
 		
@@ -121,11 +121,11 @@ public static void main (String [] args) {
 		      File outputWriter = new File(outputFile);
 		      if (outputWriter.createNewFile()) {
 		    	  FileWriter myWriter = new FileWriter(outputFile);
-		    	  int z = 0;
-		    	  while (z <= outputTextArray.length) {
-		    			  myWriter.write(outputTextArray[z]);
+		    	  int outputLine = 0;
+		    	  while (outputLine <= outputTextArray.length) {
+		    			  myWriter.write(outputTextArray[outputLine]);
 		    			  myWriter.write("/n");
-		    			  z++;
+		    			  outputLine++;
 		    	  }
 		          myWriter.close();
 		      } 

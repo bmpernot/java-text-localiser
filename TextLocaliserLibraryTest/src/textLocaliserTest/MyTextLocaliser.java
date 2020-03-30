@@ -27,37 +27,39 @@ public String findDelimiter(String Text) {
 	
 	boolean delimiter = false;
 	String array[] = Text.split("");
-	int n = 0;
+	int indexNumber = 0;
 	String delimiterValue = null;
 	
 	while (delimiter == false) {
 		
-		boolean found = isDigit(array[n]);
+		boolean found = isDigit(array[indexNumber]);
 		
 		if(found == true) {
 			delimiter = true;
-			delimiterValue = array[n];
-			
+			delimiterValue = array[indexNumber];
 		}
 		
-		else {n++;}
+		else {
+			indexNumber++;
+		}
 	}
+	
 	return delimiterValue;
 }
 
 public int findIndexNumber(String array [], String value) {
-	int indexNumberValue = 0;
+	int indexNumberOfValue = 0;
 	boolean foundValue = false;
 	while (foundValue == false) {
-		boolean test = array[indexNumberValue].contains(value);
+		boolean test = array[indexNumberOfValue].contains(value);
 		if (test == true) {
 			foundValue = true;
 		}
 		else {
-			indexNumberValue++;
+			indexNumberOfValue++;
 		}
 	}
-	return indexNumberValue;
+	return indexNumberOfValue;
 }
 
 @Override
@@ -90,8 +92,8 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	
 	Map<String, String> convert = new HashMap<String, String>();
 	
-	for (int i = 0; i <= inputFormatDateFields.length; i++) {
-		convert.put(inputFormatDateFields[i], inputTextDateFields[i]);
+	for (int increment = 0; increment <= inputFormatDateFields.length; increment++) {
+		convert.put(inputFormatDateFields[increment], inputTextDateFields[increment]);
 	}
 	
 	int inputYear = findIndexNumber(inputFormatDateFields, "y");
