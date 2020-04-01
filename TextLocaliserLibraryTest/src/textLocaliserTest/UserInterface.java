@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import textLocaliserTest.MyTextLocaliser; // will need to change when put back into real application
 
 public class UserInterface {
@@ -27,6 +28,7 @@ public static void main (String [] args) {
 	    
 	    System.out.println("Please enter the output text file's location:");
 	    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
+	    System.out.println("for testing use - C:\\Users\\benpe\\Documents\\Java\\Assessment");
 	    String outputFileLocation = userInput.nextLine(); 
 	    
 	    userInput.close();
@@ -55,7 +57,7 @@ public static void main (String [] args) {
 		
 		String inputText = null;
 		int fileLine = 0;
-		while (fileLine < fileLines.size()) {
+		while (fileLine <= fileLines.size()) {
 			inputText = inputText + "   " + fileLines.get(fileLine);
 			fileLine++;
 		}
@@ -90,7 +92,16 @@ public static void main (String [] args) {
 			dateMatch.appendReplacement(stringBufferDate, dateText);
 		}
 		
-		int numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);
+		int numberOfCurrency = 0;
+		
+		if (Integer.parseInt(numberOfDates) == 0) {
+			
+			numberOfCurrency = Integer.parseInt(localisedValuesArray[2]);
+		}
+		
+		else {
+			numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);	
+		}
 		
 		String regularExpressionCurrency = "C[*]";
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
@@ -122,6 +133,7 @@ public static void main (String [] args) {
 		      if (outputWriter.createNewFile()) {
 		    	  FileWriter myWriter = new FileWriter(outputFile);
 		    	  int outputLine = 0;
+		    	  
 		    	  while (outputLine <= outputTextArray.length) {
 		    			  myWriter.write(outputTextArray[outputLine]);
 		    			  myWriter.write("/n");

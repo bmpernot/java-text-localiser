@@ -282,14 +282,10 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 		System.out.println(numberOfDates); 	// DEBUG STATEMENT
 	}
 	
-	localisedDateValues = numberOfDates + localisedDateValues;
+	localisedDateValues = numberOfDates + " " + localisedDateValues;
 	
 	System.out.println("following string is the number of dates followed by localisedDateValues"); 	// DEBUG STATEMENT
 	System.out.println(localisedDateValues); 	// DEBUG STATEMENT
-	
-	
-	// break //
-	
 	
 	String localisedCurrencyValues = null;
 	int numberOfCurrencies = 0;
@@ -341,7 +337,7 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     	
     }
     
-    localisedCurrencyValues = numberOfCurrencies + localisedCurrencyValues;
+    localisedCurrencyValues = numberOfCurrencies + " " + localisedCurrencyValues;
     
     System.out.println("following string is the number of currencies followed by all the localised currency"); 	// DEBUG STATEMENT
 	System.out.println(localisedCurrencyValues); 	// DEBUG STATEMENT
