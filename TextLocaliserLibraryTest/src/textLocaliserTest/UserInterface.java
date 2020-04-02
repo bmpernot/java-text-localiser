@@ -92,8 +92,6 @@ public static void main (String [] args) {
 		String inputText = "empty";
 		int fileLine = 0;
 		
-		// break //
-		
 		while (fileLine < fileLines.size()) {
 			if(inputText.equals("empty") == true) { 
 				inputText = fileLines.get(fileLine) + "   ";
@@ -105,8 +103,6 @@ public static void main (String [] args) {
 				fileLine++;
 			}
 		}
-		
-		// break //
 		
 		System.out.println("following string is the intput file contents as a string"); 	// DEBUG STATEMENT
 		System.out.println(inputText); 	// DEBUG STATEMENT
@@ -174,7 +170,16 @@ public static void main (String [] args) {
 		String currencyText = null;
 		
 		int currencies = 1;
-		int startOfCurrencies = startOfDates + 2;	// wrong
+		int startOfCurrencies = 0;
+		
+		if (Integer.parseInt(numberOfDates) == 0) {
+			startOfCurrencies = Integer.parseInt(localisedValuesArray[3]);
+		}
+		
+		else {
+			startOfCurrencies = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 2]);	
+		}
+		
 		ArrayList<String> localCurrencyArray = new ArrayList<String>();
 		
 		while (currencies <= numberOfCurrency) {
