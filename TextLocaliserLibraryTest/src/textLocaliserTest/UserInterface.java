@@ -98,8 +98,6 @@ public static void main (String [] args) {
 		System.out.println("following string is the number of dates"); 	// DEBUG STATEMENT
 		System.out.println(numberOfDates); 	// DEBUG STATEMENT
 		
-		// break //
-		
 		String regularExpressionDate = "D[*]";
 		Pattern datePattern = Pattern.compile(regularExpressionDate);
 		Matcher dateMatch = datePattern.matcher(inputText);
@@ -133,8 +131,6 @@ public static void main (String [] args) {
 			numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);	
 		}
 		
-		// break //
-		
 		String regularExpressionCurrency = "C[*]";
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
 		Matcher currencyMatch = currencyPattern.matcher(inputText);
@@ -158,7 +154,8 @@ public static void main (String [] args) {
 			currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 		}
 		
-		// break //
+		System.out.println("following string is the final text before getting split"); 	// DEBUG STATEMENT
+		System.out.println(inputText); 	// DEBUG STATEMENT
 		
 		String outputTextArray [] = inputText.split("   ");
 		
