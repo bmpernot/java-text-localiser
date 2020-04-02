@@ -1,5 +1,6 @@
 package textLocaliserTest;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -76,13 +77,17 @@ public static void main (String [] args) {
 		String inputText = null;
 		int fileLine = 0;
 		
-		System.out.println("following string is the intput file contents as a string"); 	// DEBUG STATEMENT
+		// break //
 		
-		while (fileLine <= fileLines.size()) {
-			inputText = inputText + "   " + fileLines.get(fileLine);
+		while (fileLine < fileLines.size()) {
+			inputText = inputText + fileLines.get(fileLine) + "   ";
 			fileLine++;
-			System.out.println(inputText); 	// DEBUG STATEMENT
 		}
+		
+		// break //
+		
+		System.out.println("following string is the intput file contents as a string"); 	// DEBUG STATEMENT
+		System.out.println(inputText); 	// DEBUG STATEMENT
 		
 		TextLocaliser MyConverter = new MyTextLocaliser();
 		
@@ -97,6 +102,8 @@ public static void main (String [] args) {
 		
 		System.out.println("following string is the number of dates"); 	// DEBUG STATEMENT
 		System.out.println(numberOfDates); 	// DEBUG STATEMENT
+		
+		// break //
 		
 		String regularExpressionDate = "D[*]";
 		Pattern datePattern = Pattern.compile(regularExpressionDate);
@@ -131,6 +138,13 @@ public static void main (String [] args) {
 			numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);	
 		}
 		
+		// break //
+		
+		System.out.println("following string is the number of currencies"); 	// DEBUG STATEMENT
+		System.out.println(numberOfCurrency); 	// DEBUG STATEMENT
+		
+		// break //
+		
 		String regularExpressionCurrency = "C[*]";
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
 		Matcher currencyMatch = currencyPattern.matcher(inputText);
@@ -138,7 +152,7 @@ public static void main (String [] args) {
 		String currencyText = null;
 		
 		int currencies = 1;
-		int startOfCurrencies = startOfDates + 2;
+		int startOfCurrencies = startOfDates + 2;	// wrong
 		ArrayList<String> localCurrencyArray = new ArrayList<String>();
 		
 		while (currencies <= numberOfCurrency) {
@@ -154,6 +168,8 @@ public static void main (String [] args) {
 			currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 		}
 		
+		// break //
+		
 		System.out.println("following string is the final text before getting split"); 	// DEBUG STATEMENT
 		System.out.println(inputText); 	// DEBUG STATEMENT
 		
@@ -162,12 +178,14 @@ public static void main (String [] args) {
 		try {
 		      File outputWriter = new File(outputFile);
 		      if (outputWriter.createNewFile()) {
-		    	  FileWriter myWriter = new FileWriter(outputFile);
+		    	  
+		    	  BufferedWriter myWriter = new BufferedWriter(new FileWriter(outputFile, true));
+		    	  
 		    	  int outputLine = 0;
 		    	  
-		    	  while (outputLine <= outputTextArray.length) {
+		    	  while (outputLine < outputTextArray.length) {
 		    			  myWriter.write(outputTextArray[outputLine]);
-		    			  myWriter.write("/n");
+		    			  myWriter.newLine();
 		    			  outputLine++;
 		    	  }
 		          myWriter.close();
