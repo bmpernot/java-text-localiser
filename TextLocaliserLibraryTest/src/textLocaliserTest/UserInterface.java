@@ -32,6 +32,15 @@ public static void main (String [] args) {
 	    System.out.println("for testing use - C:\\Users\\benpe\\Documents\\Java\\Assessment");
 	    String outputFileLocation = userInput.nextLine(); 
 	    
+	    System.out.println("Please enter the input text file's name:");
+	    System.out.println("for testing use - sampleFile");
+	    String inputFileName = userInput.nextLine(); 
+	    
+	    System.out.println("Please enter the input text file's location:");
+	    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
+	    System.out.println("for testing use - C:\\Users\\benpe\\Documents\\Java\\Assessment");
+	    String inputFileLocation = userInput.nextLine(); 
+	    
 	    userInput.close();
 	    
 	    System.out.println("following string is the input country"); 	// DEBUG STATEMENT
@@ -46,10 +55,15 @@ public static void main (String [] args) {
 		System.out.println("following string is the output file name"); 	// DEBUG STATEMENT
 		System.out.println(outputFileName); 	// DEBUG STATEMENT
 	    
-	    String outputFile = outputFileLocation + "\\" + outputFileName + ".txt";
+	    String outputFilePath = outputFileLocation + "\\" + outputFileName + ".txt";
 	    
-	    System.out.println("following string is the output file"); 	// DEBUG STATEMENT
-		System.out.println(outputFile); 	// DEBUG STATEMENT
+	    System.out.println("following string is the output file path"); 	// DEBUG STATEMENT
+		System.out.println(outputFilePath); 	// DEBUG STATEMENT
+		
+		String inputFilePath = inputFileLocation + "\\" + inputFileName + ".txt";
+		
+		System.out.println("following string is the input file path"); 	// DEBUG STATEMENT
+		System.out.println(inputFilePath); 	// DEBUG STATEMENT
 		
 		ArrayList<String> fileLines = new ArrayList<String>();
 		
@@ -57,6 +71,7 @@ public static void main (String [] args) {
 			
 			File inputFile = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFile.txt");	
 					// not going to work as the user can not say what file to read
+					// need to get inputFilePath in there
 			
 			Scanner myReader = new Scanner(inputFile);
 			
@@ -74,14 +89,21 @@ public static void main (String [] args) {
 			e.printStackTrace();
 		}
 		
-		String inputText = null;
+		String inputText = "empty";
 		int fileLine = 0;
 		
 		// break //
 		
 		while (fileLine < fileLines.size()) {
-			inputText = inputText + fileLines.get(fileLine) + "   ";
-			fileLine++;
+			if(inputText.equals("empty") == true) { 
+				inputText = fileLines.get(fileLine) + "   ";
+				fileLine++;
+			}
+			
+			else {
+				inputText = inputText + fileLines.get(fileLine) + "   ";
+				fileLine++;
+			}
 		}
 		
 		// break //
@@ -176,10 +198,10 @@ public static void main (String [] args) {
 		String outputTextArray [] = inputText.split("   ");
 		
 		try {
-		      File outputWriter = new File(outputFile);
+		      File outputWriter = new File(outputFilePath);
 		      if (outputWriter.createNewFile()) {
 		    	  
-		    	  BufferedWriter myWriter = new BufferedWriter(new FileWriter(outputFile, true));
+		    	  BufferedWriter myWriter = new BufferedWriter(new FileWriter(outputFilePath, true));
 		    	  
 		    	  int outputLine = 0;
 		    	  
