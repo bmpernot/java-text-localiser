@@ -33,10 +33,25 @@ public static void main (String [] args) {
 	    
 	    userInput.close();
 	    
-	    String outputFile = outputFileLocation + "\\" + outputFileName + ".txt";
+	    System.out.println("following string is the input country"); 	// DEBUG STATEMENT
+		System.out.println(inputCountry); 	// DEBUG STATEMENT
 		
+		System.out.println("following string is the output country"); 	// DEBUG STATEMENT
+		System.out.println(outputCountry); 	// DEBUG STATEMENT
+		
+		System.out.println("following string is the output file location"); 	// DEBUG STATEMENT
+		System.out.println(outputFileLocation); 	// DEBUG STATEMENT
+		
+		System.out.println("following string is the output file name"); 	// DEBUG STATEMENT
+		System.out.println(outputFileName); 	// DEBUG STATEMENT
+	    
+	    String outputFile = outputFileLocation + "\\" + outputFileName + ".txt";
+	    
+	    System.out.println("following string is the output file"); 	// DEBUG STATEMENT
+		System.out.println(outputFile); 	// DEBUG STATEMENT
 		
 		ArrayList<String> fileLines = new ArrayList<String>();
+		
 		try {
 			
 			File inputFile = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFile.txt");	
@@ -44,9 +59,12 @@ public static void main (String [] args) {
 			
 			Scanner myReader = new Scanner(inputFile);
 			
+			System.out.println("following lines contain the input file contents"); 	// DEBUG STATEMENT
+			
 			while (myReader.hasNextLine()) {
 				String FileText = myReader.nextLine();
 				fileLines.add(FileText);
+				System.out.println(FileText); 	// DEBUG STATEMENT
 			}
 			myReader.close();
 		}
@@ -57,18 +75,30 @@ public static void main (String [] args) {
 		
 		String inputText = null;
 		int fileLine = 0;
+		
+		System.out.println("following string is the intput file contents as a string"); 	// DEBUG STATEMENT
+		
 		while (fileLine <= fileLines.size()) {
 			inputText = inputText + "   " + fileLines.get(fileLine);
 			fileLine++;
+			System.out.println(inputText); 	// DEBUG STATEMENT
 		}
 		
 		TextLocaliser MyConverter = new MyTextLocaliser();
 		
 		String localisedValues = MyConverter.localise(inputCountry, outputCountry, inputText);
 		
+		System.out.println("following string is the localised values"); 	// DEBUG STATEMENT
+		System.out.println(localisedValues); 	// DEBUG STATEMENT
+		
 		String localisedValuesArray [] = localisedValues.split(" ");
 		
 		String numberOfDates = localisedValuesArray[0];
+		
+		System.out.println("following string is the number of dates"); 	// DEBUG STATEMENT
+		System.out.println(numberOfDates); 	// DEBUG STATEMENT
+		
+		// break //
 		
 		String regularExpressionDate = "D[*]";
 		Pattern datePattern = Pattern.compile(regularExpressionDate);
@@ -103,6 +133,8 @@ public static void main (String [] args) {
 			numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);	
 		}
 		
+		// break //
+		
 		String regularExpressionCurrency = "C[*]";
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
 		Matcher currencyMatch = currencyPattern.matcher(inputText);
@@ -125,6 +157,8 @@ public static void main (String [] args) {
 			currencies++;
 			currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 		}
+		
+		// break //
 		
 		String outputTextArray [] = inputText.split("   ");
 		
