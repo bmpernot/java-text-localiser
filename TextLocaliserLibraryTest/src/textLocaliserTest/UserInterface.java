@@ -69,9 +69,13 @@ public static void main (String [] args) {
 		
 		try {
 			
+			// break //
+			
 			File inputFile = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFile.txt");	
 					// not going to work as the user can not say what file to read
 					// need to get inputFilePath in there
+			
+			// break //
 			
 			Scanner myReader = new Scanner(inputFile);
 			
