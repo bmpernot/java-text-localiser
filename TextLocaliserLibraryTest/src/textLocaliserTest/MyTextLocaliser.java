@@ -249,7 +249,7 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	String localisedDateValues = null;
 	int numberOfDates = 0;
 	
-	String regularExpressionDate = "D[*]";
+	String regularExpressionDate = "D\\[[^\\[]*\\]";
 	Pattern datePattern = Pattern.compile(regularExpressionDate);
 	Matcher dateMatch = datePattern.matcher(inputtext);
 	
@@ -290,7 +290,7 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	String localisedCurrencyValues = null;
 	int numberOfCurrencies = 0;
 	
-	String regularExpressionCurrency = "C[*]";
+	String regularExpressionCurrency = "C\\[[^\\[]*\\]";
 	Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
     Matcher currencyMatch = currencyPattern.matcher(inputtext);
     

@@ -69,14 +69,8 @@ public static void main (String [] args) {
 		
 		try {
 			
-			// break //
-			
 			File inputFile = new File(inputFilePath);	
-			//File inputFile = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFile.txt");
-			// need to test
-			
-			// break //
-			
+
 			Scanner myReader = new Scanner(inputFile);
 			
 			System.out.println("following lines contain the input file contents"); 	// DEBUG STATEMENT
@@ -127,7 +121,7 @@ public static void main (String [] args) {
 		
 		// break //
 		
-		String regularExpressionDate = "D[*]";
+		String regularExpressionDate = "D\\[[^\\[]*\\]";
 		Pattern datePattern = Pattern.compile(regularExpressionDate);
 		Matcher dateMatch = datePattern.matcher(inputText);
 		
@@ -167,7 +161,7 @@ public static void main (String [] args) {
 		
 		// break //
 		
-		String regularExpressionCurrency = "C[*]";
+		String regularExpressionCurrency = "C\\[[^\\[]*\\]";
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
 		Matcher currencyMatch = currencyPattern.matcher(inputText);
 		
@@ -193,7 +187,7 @@ public static void main (String [] args) {
 		
 		StringBuffer stringBufferCurrency = new StringBuffer();
 		
-		while (dateMatch.find()) {
+		while (currencyMatch.find()) {
 			currencyText = "C[" + localDateArray.get(currencies) + "]";
 			currencies++;
 			currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
