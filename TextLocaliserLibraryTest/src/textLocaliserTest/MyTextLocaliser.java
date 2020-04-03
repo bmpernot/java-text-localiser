@@ -26,25 +26,22 @@ public void loadCurrencySymbolsLocation(Map<String, String> location) {
 	location.put("€", "post");
 }
 
-public boolean isDigit(String character) {
-	if ("0123456789".contains(character)) {
-		return false;
-	}
-	else {
-		return true;
-	}
-}
-	
 public String findDelimiter(String Text) {
-	
+
 	boolean delimiter = false;
+	boolean found = false;
 	String array[] = Text.split("");
 	int indexNumber = 0;
 	String delimiterValue = null;
 	
 	while (delimiter == false) {
 		
-		boolean found = isDigit(array[indexNumber]);
+		if ("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".contains(array[indexNumber])) {
+			found = false;
+		}
+		else {
+			found =  true;
+		}
 		
 		if(found == true) {
 			delimiter = true;
@@ -59,11 +56,11 @@ public String findDelimiter(String Text) {
 	return delimiterValue;
 }
 
-public int findIndexNumber(String array [], String value) {
+public int findIndexNumber(String array [], CharSequence value) {
 	int indexNumberOfValue = 0;
 	boolean foundValue = false;
 	while (foundValue == false) {
-		boolean test = array[indexNumberOfValue].contains(value);
+		boolean test = array[indexNumberOfValue].contains(value); // fails
 		if (test == true) {
 			foundValue = true;
 		}
@@ -93,7 +90,7 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	String inputTextDateFields[] = inputText.split(inputTextDelimiterValue);
 	
 	System.out.println("following string is the split fields"); 	// DEBUG STATEMENT
-	System.out.println(inputTextDateFields); 	// DEBUG STATEMENT
+	System.out.println(inputTextDateFields[0] + " " + inputTextDateFields[1] + " " + inputTextDateFields[2]); 	// DEBUG STATEMENT
 	
 	Map<String, String> inputMap = new HashMap<String, String>();
 	loadDateFormats(inputMap);
@@ -108,11 +105,10 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	System.out.println("following string is the delimiter"); 	// DEBUG STATEMENT
 	System.out.println(inputFormatDelimiterValue); 	// DEBUG STATEMENT
 	
-	String inputFormatDateFields[] = inputText.split(inputFormatDelimiterValue);
+	String inputFormatDateFields[] = inputDateFormat.split(inputFormatDelimiterValue);
 	
 	System.out.println("following string is the split fields"); 	// DEBUG STATEMENT
-	System.out.println(inputFormatDateFields); 	// DEBUG STATEMENT
-	
+	System.out.println(inputFormatDateFields[0] + " " + inputFormatDateFields[1] + " " + inputFormatDateFields[2]); 	// DEBUG STATEMENT
 	
 	Map<String, String> outputMap = new HashMap<String, String>();
 	loadDateFormats(outputMap);
@@ -127,18 +123,17 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	System.out.println("following string is the delimiter"); 	// DEBUG STATEMENT
 	System.out.println(outputFormatDelimiterValue); 	// DEBUG STATEMENT
 	
-	String outputFormatDateFields[] = inputText.split(outputFormatDelimiterValue);
+	String outputFormatDateFields[] = outputDateFormat.split(outputFormatDelimiterValue);
 	
 	System.out.println("following string is the split fields"); 	// DEBUG STATEMENT
-	System.out.println(outputFormatDateFields); 	// DEBUG STATEMENT
+	System.out.println(outputFormatDateFields[0] + " " + outputFormatDateFields[1] + " " + outputFormatDateFields[2]); 	// DEBUG STATEMENT
 	
 	
 	Map<String, String> convert = new HashMap<String, String>();
 	
-	for (int increment = 0; increment <= inputFormatDateFields.length; increment++) {
+	for (int increment = 0; increment < inputFormatDateFields.length; increment++) {
 		convert.put(inputFormatDateFields[increment], inputTextDateFields[increment]);
 	}
-	
 	int inputYear = findIndexNumber(inputFormatDateFields, "y");
 	
 	System.out.println("following interger is the input index number for years"); 	// DEBUG STATEMENT
@@ -256,7 +251,11 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	String dateText = null;
 	
 	while (dateMatch.find()) {
-		dateText = dateMatch.toString();
+		
+		int start = dateMatch.start();
+		int end = dateMatch.end();
+		
+		dateText = inputtext.substring(start, end);
 		
 		System.out.println("following dates are in the input file"); 	// DEBUG STATEMENT
 		System.out.println(dateText); 	// DEBUG STATEMENT

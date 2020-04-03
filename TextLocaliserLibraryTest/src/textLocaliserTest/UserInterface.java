@@ -20,9 +20,11 @@ public static void main (String [] args) {
 		
 	    System.out.println("Please enter the country format the file is in: (UK, US, DE)");
 	    String inputCountry = userInput.nextLine(); 
+	    inputCountry = inputCountry.toUpperCase();
 	    
 	    System.out.println("Please enter the country format that you want the output file to be in: (UK, US, DE)");
 	    String outputCountry = userInput.nextLine(); 
+	    outputCountry = outputCountry.toUpperCase();
 	    
 	    System.out.println("Please enter the output text file's name:");
 	    String outputFileName = userInput.nextLine(); 
@@ -118,9 +120,7 @@ public static void main (String [] args) {
 		
 		System.out.println("following string is the number of dates"); 	// DEBUG STATEMENT
 		System.out.println(numberOfDates); 	// DEBUG STATEMENT
-		
-		// break //
-		
+
 		String regularExpressionDate = "D\\[[^\\[]*\\]";
 		Pattern datePattern = Pattern.compile(regularExpressionDate);
 		Matcher dateMatch = datePattern.matcher(inputText);
@@ -154,13 +154,9 @@ public static void main (String [] args) {
 			numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);	
 		}
 		
-		// break //
-		
 		System.out.println("following string is the number of currencies"); 	// DEBUG STATEMENT
 		System.out.println(numberOfCurrency); 	// DEBUG STATEMENT
-		
-		// break //
-		
+
 		String regularExpressionCurrency = "C\\[[^\\[]*\\]";
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
 		Matcher currencyMatch = currencyPattern.matcher(inputText);
@@ -192,8 +188,6 @@ public static void main (String [] args) {
 			currencies++;
 			currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 		}
-		
-		// break //
 		
 		System.out.println("following string is the final text before getting split"); 	// DEBUG STATEMENT
 		System.out.println(inputText); 	// DEBUG STATEMENT
