@@ -60,7 +60,7 @@ public int findIndexNumber(String array [], CharSequence value) {
 	int indexNumberOfValue = 0;
 	boolean foundValue = false;
 	while (foundValue == false) {
-		boolean test = array[indexNumberOfValue].contains(value); // fails
+		boolean test = array[indexNumberOfValue].contains(value);
 		if (test == true) {
 			foundValue = true;
 		}
@@ -133,6 +133,12 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	
 	for (int increment = 0; increment < inputFormatDateFields.length; increment++) {
 		convert.put(inputFormatDateFields[increment], inputTextDateFields[increment]);
+		
+		System.out.println("following string is the input format date field"); 	// DEBUG STATEMENT
+		System.out.println(inputFormatDateFields[increment]); 	// DEBUG STATEMENT
+		
+		System.out.println("following string is the input text date field"); 	// DEBUG STATEMENT
+		System.out.println(inputTextDateFields[increment]); 	// DEBUG STATEMENT
 	}
 	int inputYear = findIndexNumber(inputFormatDateFields, "y");
 	
@@ -142,7 +148,7 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	int outputYear = findIndexNumber(outputFormatDateFields, "y");
 	
 	System.out.println("following interger is the output index number for years"); 	// DEBUG STATEMENT
-	System.out.println(inputYear); 	// DEBUG STATEMENT
+	System.out.println(outputYear); 	// DEBUG STATEMENT
 	
 	if (outputFormatDateFields[outputYear] == inputFormatDateFields[inputYear]) {}
 	
@@ -162,7 +168,7 @@ public String localiesDate(String inputFormat, String outputFormat, String input
 	
 	String localisedDate = convert.get(outputFormatDateFields[0]) + outputFormatDelimiterValue + 
 			convert.get(outputFormatDateFields[1]) + outputFormatDelimiterValue + 
-			convert.get(outputFormatDateFields[2]);
+			outputFormatDateFields[2];
 	
 	System.out.println("following string is the final output"); 	// DEBUG STATEMENT
 	System.out.println(localisedDate); 	// DEBUG STATEMENT
@@ -270,7 +276,13 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 		System.out.println("following string is the converted value"); 	// DEBUG STATEMENT
 		System.out.println(localDate); 	// DEBUG STATEMENT
 		
-		localisedDateValues = localisedDateValues + " " + localDate;
+		if (numberOfDates == 0) {
+			localisedDateValues = localDate;
+		}
+		
+		else {
+			localisedDateValues = localisedDateValues + " " + localDate;
+		}
 		
 		System.out.println("following string are the localised date values"); 	// DEBUG STATEMENT
 		System.out.println(localisedDateValues); 	// DEBUG STATEMENT
