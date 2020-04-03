@@ -71,9 +71,9 @@ public static void main (String [] args) {
 			
 			// break //
 			
-			File inputFile = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFile.txt");	
-					// not going to work as the user can not say what file to read
-					// need to get inputFilePath in there
+			File inputFile = new File(inputFilePath);	
+			//File inputFile = new File("C:\\Users\\benpe\\Documents\\Java\\Assessment\\sampleFile.txt");
+			// need to test
 			
 			// break //
 			
@@ -177,11 +177,11 @@ public static void main (String [] args) {
 		int startOfCurrencies = 0;
 		
 		if (Integer.parseInt(numberOfDates) == 0) {
-			startOfCurrencies = Integer.parseInt(localisedValuesArray[3]);
+			startOfCurrencies = 3;
 		}
 		
 		else {
-			startOfCurrencies = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 2]);	
+			startOfCurrencies = Integer.parseInt(numberOfDates) + 2;	
 		}
 		
 		ArrayList<String> localCurrencyArray = new ArrayList<String>();
