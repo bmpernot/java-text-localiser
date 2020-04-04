@@ -8,9 +8,8 @@ import java.text.DecimalFormat;
 
 public class MyTextLocaliser implements TextLocaliser {
 	
-public String insertString(String originalString, String stringToBeInserted, int index) {
-
-        String newString = originalString.substring(0, index + 1) + stringToBeInserted + originalString.substring(index + 1); 
+public String insertString(String oldString, String stringToBeInserted, int index) {
+        String newString = oldString.substring(0, index + 1) + stringToBeInserted + oldString.substring(index + 1); 
         return newString;
 }
 

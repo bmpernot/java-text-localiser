@@ -163,7 +163,7 @@ public static void main (String [] args) {
 		
 		String currencyText = null;
 		
-		int currencies = 1;
+		int currencies = 0;
 		int startOfCurrencies = 0;
 		
 		if (Integer.parseInt(numberOfDates) == 0) {
@@ -176,7 +176,7 @@ public static void main (String [] args) {
 		
 		ArrayList<String> localCurrencyArray = new ArrayList<String>();
 		
-		while (currencies <= numberOfCurrency) {
+		while (currencies < numberOfCurrency) {
 			localCurrencyArray.add(localisedValuesArray[startOfCurrencies]);
 			currencies++;
 		}
