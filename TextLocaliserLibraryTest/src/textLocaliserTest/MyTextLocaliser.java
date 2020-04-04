@@ -7,6 +7,12 @@ import java.util.regex.Pattern;
 import java.text.DecimalFormat;
 
 public class MyTextLocaliser implements TextLocaliser {
+	
+public String insertString(String originalString, String stringToBeInserted, int index) {
+
+        String newString = originalString.substring(0, index + 1) + stringToBeInserted + originalString.substring(index + 1); 
+        return newString;
+}
 
 public void loadCurrencyExchangeRate(Map<String, Double> exchangeRate) {
 
@@ -217,27 +223,36 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	DecimalFormat df = new DecimalFormat("0.00");
 	
 	String localisedCurrency = df.format(finalValue);
-	
+	int numberOfSpaces = 0;
+	int index = localisedCurrency.length()-7;
 	
 	if (outputFormat.equals("DE")) {
 		localisedCurrency = localisedCurrency.replace(".", ",");
-		// find a way to add "." every third number
+		for (int increment = 1; increment <= ((localisedCurrency.length()-4)/3); increment++) {
+			localisedCurrency = insertString(localisedCurrency, ".", index - numberOfSpaces);
+			numberOfSpaces++;
+			index = index - 3;
+		}
 	}
 	
 	else if(outputFormat.equals("US") || outputFormat.equals("UK")) {
-		// find a way to add "," every third number
-		
+		for (int increment = 1; increment <= ((localisedCurrency.length()-4)/3); increment++) {	
+			localisedCurrency = insertString(localisedCurrency, ",", index - numberOfSpaces);
+			numberOfSpaces++;
+			index = index - 3;
+		}
+			
 	}
 	
 	else {}
 	
 	
-	String symbol = symbolMap.get(inputFormat);
+	String symbol = symbolMap.get(outputFormat);
 	
 	System.out.println("following string is the symbol"); 	// DEBUG STATEMENT
 	System.out.println(symbol); 	// DEBUG STATEMENT
 	
-	String position = location.get(inputFormat);
+	String position = location.get(outputFormat);
 	
 	System.out.println("following string is the position"); 	// DEBUG STATEMENT
 	System.out.println(position); 	// DEBUG STATEMENT
@@ -398,4 +413,5 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     
 	return localisedValues;
 }
+
 }
