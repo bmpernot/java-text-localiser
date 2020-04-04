@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.text.DecimalFormat;
 
 public class MyTextLocaliser implements TextLocaliser {
 
@@ -21,9 +22,9 @@ public void loadCurrencyExchangeRate(Map<String, Double> exchangeRate) {
 	
 public void loadCurrencySymbolsLocation(Map<String, String> location) {
 
-	location.put("£", "pre");
-	location.put("$", "pre");
-	location.put("€", "post");
+	location.put("UK", "pre");
+	location.put("US", "pre");
+	location.put("DE", "post");
 }
 
 public String findDelimiter(String Text) {
@@ -213,27 +214,43 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	System.out.println("following interger is the final value"); 	// DEBUG STATEMENT
 	System.out.println(finalValue); 	// DEBUG STATEMENT
 	
-	String localisedCurrency = null;
+	DecimalFormat df = new DecimalFormat("0.00");
+	
+	String localisedCurrency = df.format(finalValue);
+	
+	
+	if (outputFormat.equals("DE")) {
+		localisedCurrency = localisedCurrency.replace(".", ",");
+		// find a way to add "." every third number
+	}
+	
+	else if(outputFormat.equals("US") || outputFormat.equals("UK")) {
+		// find a way to add "," every third number
+		
+	}
+	
+	else {}
+	
 	
 	String symbol = symbolMap.get(inputFormat);
 	
 	System.out.println("following string is the symbol"); 	// DEBUG STATEMENT
 	System.out.println(symbol); 	// DEBUG STATEMENT
 	
-	String position = location.get(symbol);
+	String position = location.get(inputFormat);
 	
 	System.out.println("following string is the position"); 	// DEBUG STATEMENT
 	System.out.println(position); 	// DEBUG STATEMENT
 	
 	if (position.equals("pre")) {
-		localisedCurrency = symbol + Double.toString(finalValue);
+		localisedCurrency = symbol + localisedCurrency;
 		
 		System.out.println("following string is the final currency"); 	// DEBUG STATEMENT
 		System.out.println(localisedCurrency); 	// DEBUG STATEMENT
 	}
 	
 	else if (position.equals("post")) {
-		localisedCurrency = Double.toString(finalValue) + symbol;
+		localisedCurrency = localisedCurrency + symbol;
 		
 		System.out.println("following string is the final currency"); 	// DEBUG STATEMENT
 		System.out.println(localisedCurrency); 	// DEBUG STATEMENT
@@ -309,7 +326,10 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     
     while (currencyMatch.find()) {
     	
-    	currencyText = currencyMatch.toString();
+    	int start = currencyMatch.start();
+		int end = currencyMatch.end();
+		
+		currencyText = inputtext.substring(start, end);
     	
     	Map<String, String> location = new HashMap<String, String>();
     	loadCurrencySymbolsLocation(location);
@@ -331,6 +351,15 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     	
     	else {}
     	
+    	if (inputFormat.equals("DE")) {
+    		currencyText = currencyText.replace(".", "");
+    		currencyText = currencyText.replace(",", ".");
+    	}
+    	else if (inputFormat.equals("US") || inputFormat.equals("UK")) {
+    		currencyText = currencyText.replace(",", "");
+    	}
+    	else {}
+    	
     	double inputCurrency = Double.parseDouble(currencyText);
     	
     	System.out.println("following double is the currency without any symbols"); 	// DEBUG STATEMENT
@@ -341,12 +370,21 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 		System.out.println("following string is the localised currency"); 	// DEBUG STATEMENT
 		System.out.println(localCurrency); 	// DEBUG STATEMENT
 		
-		localisedCurrencyValues = localisedCurrencyValues + " " + localCurrency;
+		if (numberOfCurrencies == 0) {
+			localisedCurrencyValues = localCurrency;
+		}
 		
+		else {
+			localisedCurrencyValues = localisedCurrencyValues + " " + localCurrency;
+		}
+		
+		numberOfCurrencies++;
+		
+    }
+    
 		System.out.println("following string is all the localised currency"); 	// DEBUG STATEMENT
 		System.out.println(localisedCurrencyValues); 	// DEBUG STATEMENT
     	
-    }
     
     localisedCurrencyValues = numberOfCurrencies + " " + localisedCurrencyValues;
     
@@ -360,5 +398,4 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     
 	return localisedValues;
 }
-
 }
