@@ -143,6 +143,13 @@ public static void main (String [] args) {
 			dateMatch.appendReplacement(stringBufferDate, dateText);
 		}
 		
+		dateMatch.appendTail(stringBufferDate);
+		
+		System.out.println("following string is the new text with replaced dates"); 	// DEBUG STATEMENT
+		System.out.println(stringBufferDate); 	// DEBUG STATEMENT
+		
+		String newText = stringBufferDate.toString();
+		
 		int numberOfCurrency = 0;
 		
 		if (Integer.parseInt(numberOfDates) == 0) {
@@ -159,10 +166,11 @@ public static void main (String [] args) {
 
 		String regularExpressionCurrency = "C\\[[^\\[]*\\]";
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
-		Matcher currencyMatch = currencyPattern.matcher(inputText);
+		Matcher currencyMatch = currencyPattern.matcher(newText);
 		
 		String currencyText = null;
 		
+		int currenciesAdded = 0;
 		int currencies = 0;
 		int startOfCurrencies = 0;
 		
@@ -176,23 +184,27 @@ public static void main (String [] args) {
 		
 		ArrayList<String> localCurrencyArray = new ArrayList<String>();
 		
-		while (currencies < numberOfCurrency) {
+		while (currenciesAdded < numberOfCurrency) {
 			localCurrencyArray.add(localisedValuesArray[startOfCurrencies]);
-			currencies++;
+			currenciesAdded++;
 		}
 		
 		StringBuffer stringBufferCurrency = new StringBuffer();
 		
 		while (currencyMatch.find()) {
-			currencyText = "C[" + localDateArray.get(currencies) + "]";
+			currencyText = "C[" + localCurrencyArray.get(currencies) + "]";
 			currencies++;
 			currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 		}
 		
-		System.out.println("following string is the final text before getting split"); 	// DEBUG STATEMENT
-		System.out.println(inputText); 	// DEBUG STATEMENT
+		currencyMatch.appendTail(stringBufferCurrency);
 		
-		String outputTextArray [] = inputText.split("   ");
+		System.out.println("following string is the final text before getting split"); 	// DEBUG STATEMENT
+		System.out.println(stringBufferCurrency); 	// DEBUG STATEMENT
+		
+		String finalText = stringBufferCurrency.toString();
+		
+		String outputTextArray [] = finalText.split("   ");
 		
 		try {
 		      File outputWriter = new File(outputFilePath);
