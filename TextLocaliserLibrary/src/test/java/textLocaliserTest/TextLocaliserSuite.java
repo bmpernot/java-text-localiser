@@ -10,7 +10,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	textLocaliserTest.findDelimiterTest.class,
 	textLocaliserTest.findIndexNumberTest.class,
-	textLocaliserTest.insertStringTest.class
+	textLocaliserTest.insertStringTest.class,
+	textLocaliserTest.localiseCurrencyTest.class,
+	textLocaliserTest.localiseDateTest.class
 })
 
 public class TextLocaliserSuite {
