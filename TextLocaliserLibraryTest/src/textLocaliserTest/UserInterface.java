@@ -45,28 +45,10 @@ public static void main (String [] args) {
 	    
 	    userInput.close();
 	    
-	    System.out.println("following string is the input country"); 	// DEBUG STATEMENT
-		System.out.println(inputCountry); 	// DEBUG STATEMENT
-		
-		System.out.println("following string is the output country"); 	// DEBUG STATEMENT
-		System.out.println(outputCountry); 	// DEBUG STATEMENT
-		
-		System.out.println("following string is the output file location"); 	// DEBUG STATEMENT
-		System.out.println(outputFileLocation); 	// DEBUG STATEMENT
-		
-		System.out.println("following string is the output file name"); 	// DEBUG STATEMENT
-		System.out.println(outputFileName); 	// DEBUG STATEMENT
-	    
 	    String outputFilePath = outputFileLocation + "\\" + outputFileName + ".txt";
-	    
-	    System.out.println("following string is the output file path"); 	// DEBUG STATEMENT
-		System.out.println(outputFilePath); 	// DEBUG STATEMENT
 		
 		String inputFilePath = inputFileLocation + "\\" + inputFileName + ".txt";
-		
-		System.out.println("following string is the input file path"); 	// DEBUG STATEMENT
-		System.out.println(inputFilePath); 	// DEBUG STATEMENT
-		
+
 		ArrayList<String> fileLines = new ArrayList<String>();
 		
 		try {
@@ -75,12 +57,9 @@ public static void main (String [] args) {
 
 			Scanner myReader = new Scanner(inputFile);
 			
-			System.out.println("following lines contain the input file contents"); 	// DEBUG STATEMENT
-			
 			while (myReader.hasNextLine()) {
 				String FileText = myReader.nextLine();
 				fileLines.add(FileText);
-				System.out.println(FileText); 	// DEBUG STATEMENT
 			}
 			myReader.close();
 		}
@@ -104,22 +83,13 @@ public static void main (String [] args) {
 			}
 		}
 		
-		System.out.println("following string is the intput file contents as a string"); 	// DEBUG STATEMENT
-		System.out.println(inputText); 	// DEBUG STATEMENT
-		
 		TextLocaliser MyConverter = new MyTextLocaliser();
 		
 		String localisedValues = MyConverter.localise(inputCountry, outputCountry, inputText);
 		
-		System.out.println("following string is the localised values"); 	// DEBUG STATEMENT
-		System.out.println(localisedValues); 	// DEBUG STATEMENT
-		
 		String localisedValuesArray [] = localisedValues.split(" ");
 		
 		String numberOfDates = localisedValuesArray[0];
-		
-		System.out.println("following string is the number of dates"); 	// DEBUG STATEMENT
-		System.out.println(numberOfDates); 	// DEBUG STATEMENT
 
 		String regularExpressionDate = "D\\[[^\\[]*\\]";
 		Pattern datePattern = Pattern.compile(regularExpressionDate);
@@ -145,9 +115,6 @@ public static void main (String [] args) {
 		
 		dateMatch.appendTail(stringBufferDate);
 		
-		System.out.println("following string is the new text with replaced dates"); 	// DEBUG STATEMENT
-		System.out.println(stringBufferDate); 	// DEBUG STATEMENT
-		
 		String newText = stringBufferDate.toString();
 		
 		int numberOfCurrency = 0;
@@ -160,9 +127,6 @@ public static void main (String [] args) {
 		else {
 			numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);	
 		}
-		
-		System.out.println("following string is the number of currencies"); 	// DEBUG STATEMENT
-		System.out.println(numberOfCurrency); 	// DEBUG STATEMENT
 
 		String regularExpressionCurrency = "C\\[[^\\[]*\\]";
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
@@ -198,9 +162,6 @@ public static void main (String [] args) {
 		}
 		
 		currencyMatch.appendTail(stringBufferCurrency);
-		
-		System.out.println("following string is the final text before getting split"); 	// DEBUG STATEMENT
-		System.out.println(stringBufferCurrency); 	// DEBUG STATEMENT
 		
 		String finalText = stringBufferCurrency.toString();
 		
