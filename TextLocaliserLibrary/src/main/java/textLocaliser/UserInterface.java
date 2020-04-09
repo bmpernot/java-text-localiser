@@ -1,4 +1,4 @@
-package textLocaliserTest;
+package textLocaliser;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import textLocaliserTest.MyTextLocaliser;
+import textLocaliser.MyTextLocaliser;
 
 public class UserInterface {
 
