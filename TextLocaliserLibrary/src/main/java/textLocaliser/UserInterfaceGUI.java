@@ -3,15 +3,26 @@ package textLocaliser;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JComboBox;
-import java.awt.BorderLayout;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.Font;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class UserInterfaceGUI {
 
 	private JFrame frmTextLocaliser;
+	private JTextField inputFileText;
+	private JTextField outputFileDirectoryText;
+	private JTextField outputFileName;
 
 	/**
 	 * Launch the application.
@@ -33,36 +44,150 @@ public class UserInterfaceGUI {
 	 * Create the application.
 	 */
 	public UserInterfaceGUI() {
-		initialize();
+		initialise();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialise() {
 		frmTextLocaliser = new JFrame();
 		frmTextLocaliser.setTitle("Text Localiser");
-		frmTextLocaliser.getContentPane().setFont(new Font("Calibri", Font.PLAIN, 15));
-		frmTextLocaliser.setBounds(15, 5, 600, 400);
+		frmTextLocaliser.setBounds(100, 100, 500, 350);
 		frmTextLocaliser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTextLocaliser.getContentPane().setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(0, 10, 241, 25);
-		comboBox.setToolTipText("");
-		comboBox.setFont(new Font("Calibri", Font.PLAIN, 15));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Pick the input country format", "US", "UK", "DE"}));
-		frmTextLocaliser.getContentPane().add(comboBox);
+		String[] boxOptions = {"", "United States of America", "United Kingdom", "Germany"};
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(335, 254, 241, 25);
-		comboBox_1.setFont(new Font("Calibri", Font.PLAIN, 15));
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Pick the output country format", "US", "UK", "DE"}));
-		frmTextLocaliser.getContentPane().add(comboBox_1);
+		JComboBox<String> inputCountry = new JComboBox<>(boxOptions);
+		inputCountry.setBounds(255, 25, 180, 21);
+		frmTextLocaliser.getContentPane().add(inputCountry);
 		
-		JButton btnNewButton = new JButton("Finish");
-		btnNewButton.setFont(new Font("Calibri", Font.PLAIN, 18));
-		btnNewButton.setBounds(486, 324, 90, 29);
-		frmTextLocaliser.getContentPane().add(btnNewButton);
+		JComboBox<String> outputCountry = new JComboBox<>(boxOptions);
+		outputCountry.setBounds(255, 66, 180, 21);
+		frmTextLocaliser.getContentPane().add(outputCountry);
+		
+		JLabel inputCountryLabel = new JLabel("Please select an input country");
+		inputCountryLabel.setFont(new Font("Calibri", Font.PLAIN, 16));
+		inputCountryLabel.setBounds(35, 29, 210, 21);
+		frmTextLocaliser.getContentPane().add(inputCountryLabel);
+		
+		JLabel outputCountryLabel = new JLabel("Please select an output country");
+		outputCountryLabel.setFont(new Font("Calibri", Font.PLAIN, 16));
+		outputCountryLabel.setBounds(35, 68, 221, 21);
+		frmTextLocaliser.getContentPane().add(outputCountryLabel);
+		
+		JButton browseInputFile = new JButton("Browse");
+		browseInputFile.setVerticalAlignment(SwingConstants.TOP);
+		browseInputFile.setFont(new Font("Calibri", Font.PLAIN, 14));
+		browseInputFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+				int returnValue = fileChooser.showOpenDialog(null);
+				String inputFilePath = null;
+
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = fileChooser.getSelectedFile();
+					inputFilePath = selectedFile.getAbsolutePath();
+				}
+				inputFileText.setText(inputFilePath);			
+			}
+		});
+		
+		browseInputFile.setBounds(391, 126, 85, 21);
+		frmTextLocaliser.getContentPane().add(browseInputFile);
+		
+		JButton browseOutputFile = new JButton("Browse");
+		browseOutputFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// find directory
+			}
+		});
+		browseOutputFile.setVerticalAlignment(SwingConstants.TOP);
+		browseOutputFile.setFont(new Font("Calibri", Font.PLAIN, 14));
+		browseOutputFile.setBounds(391, 187, 85, 21);
+		frmTextLocaliser.getContentPane().add(browseOutputFile);
+		
+		inputFileText = new JTextField();
+		inputFileText.setBounds(10, 128, 368, 19);
+		frmTextLocaliser.getContentPane().add(inputFileText);
+		inputFileText.setColumns(10);
+		
+		outputFileDirectoryText = new JTextField();
+		outputFileDirectoryText.setColumns(10);
+		outputFileDirectoryText.setBounds(10, 189, 368, 19);
+		frmTextLocaliser.getContentPane().add(outputFileDirectoryText);
+		
+		JLabel inputFileLabel = new JLabel("Please select an input file");
+		inputFileLabel.setVerticalAlignment(SwingConstants.TOP);
+		inputFileLabel.setFont(new Font("Calibri", Font.PLAIN, 16));
+		inputFileLabel.setBounds(10, 108, 170, 21);
+		frmTextLocaliser.getContentPane().add(inputFileLabel);
+		
+		JLabel outputFileLocationLabel = new JLabel("Please select a directory for the output file");
+		outputFileLocationLabel.setVerticalAlignment(SwingConstants.TOP);
+		outputFileLocationLabel.setFont(new Font("Calibri", Font.PLAIN, 16));
+		outputFileLocationLabel.setBounds(10, 170, 286, 20);
+		frmTextLocaliser.getContentPane().add(outputFileLocationLabel);
+
+		outputFileName = new JTextField();
+		outputFileName.setBounds(10, 250, 368, 19);
+		frmTextLocaliser.getContentPane().add(outputFileName);
+		outputFileName.setColumns(10);
+		
+		JLabel outputFileNameLabel = new JLabel("Please name the output file");
+		outputFileNameLabel.setVerticalAlignment(SwingConstants.TOP);
+		outputFileNameLabel.setFont(new Font("Calibri", Font.PLAIN, 16));
+		outputFileNameLabel.setBounds(10, 230, 286, 20);
+		frmTextLocaliser.getContentPane().add(outputFileNameLabel);
+		
+		// needs to be on the bottom of the code
+		
+		JButton finish = new JButton("Finish");
+		finish.setVerticalAlignment(SwingConstants.TOP);
+		finish.setFont(new Font("Calibri", Font.PLAIN, 14));
+		
+		finish.addActionListener(new ActionListener() {
+		    
+			public void actionPerformed(ActionEvent e) {
+				
+				boolean inputFileExists = false;
+				boolean outputFileExists = true;
+				
+				
+				File inputFile = new File(inputFileText.getText());
+				
+			    if (inputFile.exists() == true) {
+			    	inputFileExists = true;
+			    }
+			    
+			    File outputFile = new File(outputFileDirectoryText.getText() +"\\" + outputFileName.getText());
+			    
+			    if (outputFile.exists() == false) {
+			    	outputFileExists = false;
+			    }
+				
+				if (inputCountry.getSelectedItem().equals("")){
+					JOptionPane.showMessageDialog(null, "Please fill out the input country correctly before continuing");
+				}
+				else if (outputCountry.getSelectedItem().equals("")) {
+					JOptionPane.showMessageDialog(null, "Please fill out the output country correctly before continuing");
+				}
+				else if (inputFileExists == false) {
+					JOptionPane.showMessageDialog(null, "Please fill out the input file field correctly before continuing");
+				}
+				else if (outputFileExists == true) {
+					JOptionPane.showMessageDialog(null, "Please fill out output file fields correctly before continuing");
+				}
+				else {
+					// return value to user interface
+				}
+			}
+		});
+		
+		finish.setBounds(391, 282, 85, 21);
+		frmTextLocaliser.getContentPane().add(finish);
+		
 	}
 }
