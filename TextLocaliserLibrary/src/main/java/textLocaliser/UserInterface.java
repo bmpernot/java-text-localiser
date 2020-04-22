@@ -15,6 +15,11 @@ import textLocaliser.MyTextLocaliser;
 public class UserInterface {
 
 public static void main (String [] args) {
+	
+		boolean inputFileExists = false;
+		boolean outputFileExists = true;
+		String inputFilePath = null;
+		String outputFilePath = null;
 		
 		Scanner userInput = new Scanner(System.in);
 		
@@ -26,28 +31,52 @@ public static void main (String [] args) {
 	    String outputCountry = userInput.nextLine(); 
 	    outputCountry = outputCountry.toUpperCase();
 	    
-	    System.out.println("Please enter the output text file's name:");
-	    String outputFileName = userInput.nextLine(); 
+	    while (inputFileExists == false) {
+	    	
+	    	System.out.println("Please enter the input text file's name:");
+		    System.out.println("for testing use - sampleFile");
+		    String inputFileName = userInput.nextLine(); 
+		    
+		    System.out.println("Please enter the input text file's location:");
+		    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
+		    System.out.println("for testing use - C:\\Users\\benpe\\Documents\\Java\\Assessment");
+		    String inputFileLocation = userInput.nextLine(); 
+		    
+		    inputFilePath = inputFileLocation + "\\" + inputFileName + ".txt";
+		    
+		    File inputFile = new File(inputFilePath);
+		    
+		    if (inputFile.exists() == true) {
+		    	inputFileExists = true;
+		    }
+		    else {
+		    	System.out.println("This file doesn't exist please enter an existing file name and location");
+		    }
+	    }
 	    
-	    System.out.println("Please enter the output text file's location:");
-	    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
-	    System.out.println("for testing use - C:\\Users\\benpe\\Documents\\Java\\Assessment");
-	    String outputFileLocation = userInput.nextLine(); 
-	    
-	    System.out.println("Please enter the input text file's name:");
-	    System.out.println("for testing use - sampleFile");
-	    String inputFileName = userInput.nextLine(); 
-	    
-	    System.out.println("Please enter the input text file's location:");
-	    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
-	    System.out.println("for testing use - C:\\Users\\benpe\\Documents\\Java\\Assessment");
-	    String inputFileLocation = userInput.nextLine(); 
+	    while (outputFileExists == true) {
+	    	
+	    	System.out.println("Please enter the output text file's name:");
+		    String outputFileName = userInput.nextLine(); 
+		    
+		    System.out.println("Please enter the output text file's location:");
+		    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
+		    System.out.println("for testing use - C:\\Users\\benpe\\Documents\\Java\\Assessment");
+		    String outputFileLocation = userInput.nextLine(); 
+		    
+		    outputFilePath = outputFileLocation + "\\" + outputFileName + ".txt";
+		    
+		    File outputFile = new File(outputFilePath);
+		    
+		    if (outputFile.exists() == false) {
+		    	outputFileExists = false;
+		    }
+		    else {
+		    	System.out.println("This file already exist please enter an non-existing file name and location");
+		    }
+	    }
 	    
 	    userInput.close();
-	    
-	    String outputFilePath = outputFileLocation + "\\" + outputFileName + ".txt";
-		
-		String inputFilePath = inputFileLocation + "\\" + inputFileName + ".txt";
 
 		ArrayList<String> fileLines = new ArrayList<String>();
 		
