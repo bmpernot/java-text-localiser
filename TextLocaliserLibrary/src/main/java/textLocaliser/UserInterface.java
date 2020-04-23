@@ -11,11 +11,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import textLocaliser.MyTextLocaliser;
+import textLocaliser.UserInterfaceGUI;
 
 public class UserInterface {
 
 public static void main (String [] args) {
-	
+		
+		UserInterfaceGUI GUI = new UserInterfaceGUI();
+
+		String values = GUI.main();
+		String valuesArray [] = values.split("   ");
+		
+		String inputCountry = valuesArray[0];
+		String outputCountry = valuesArray[1];
+		String inputFilePath = valuesArray[2];
+		String outputFilePath = valuesArray[3];
+		
+		/* need to use GUI
+		
 		boolean inputFileExists = false;
 		boolean outputFileExists = true;
 		String inputFilePath = null;
@@ -78,6 +91,8 @@ public static void main (String [] args) {
 	    
 	    userInput.close();
 
+	    // */
+	    
 		ArrayList<String> fileLines = new ArrayList<String>();
 		
 		try {

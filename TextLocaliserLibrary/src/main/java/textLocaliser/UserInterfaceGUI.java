@@ -1,21 +1,21 @@
 package textLocaliser;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
 
 public class UserInterfaceGUI {
 
@@ -26,8 +26,9 @@ public class UserInterfaceGUI {
 
 	/**
 	 * Launch the application.
+	 * @return 
 	 */
-	public static void main(String[] args) {
+	public String main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -38,6 +39,10 @@ public class UserInterfaceGUI {
 				}
 			}
 		});
+		return null;
+		// need to return values from the bottom of the page
+		
+		// need to stop program finishing before finish button is pressed
 	}
 
 	/**
@@ -83,6 +88,8 @@ public class UserInterfaceGUI {
 		browseInputFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+				fileChooser.setFileFilter(filter);
 
 				int returnValue = fileChooser.showOpenDialog(null);
 				String inputFilePath = null;
@@ -98,16 +105,29 @@ public class UserInterfaceGUI {
 		browseInputFile.setBounds(391, 126, 85, 21);
 		frmTextLocaliser.getContentPane().add(browseInputFile);
 		
-		JButton browseOutputFile = new JButton("Browse");
-		browseOutputFile.addActionListener(new ActionListener() {
+		JButton browseOutputFileLocation = new JButton("Browse");
+		browseOutputFileLocation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// find directory
+				
+				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+				jfc.setDialogTitle("Choose a directory to save your file: ");
+				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+				int returnValue = jfc.showSaveDialog(null);
+				String outputFileDirectory = null;
+				
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					if (jfc.getSelectedFile().isDirectory()) {
+						outputFileDirectory = jfc.getSelectedFile().toString();
+					}
+					outputFileDirectoryText.setText(outputFileDirectory);
+				}
 			}
 		});
-		browseOutputFile.setVerticalAlignment(SwingConstants.TOP);
-		browseOutputFile.setFont(new Font("Calibri", Font.PLAIN, 14));
-		browseOutputFile.setBounds(391, 187, 85, 21);
-		frmTextLocaliser.getContentPane().add(browseOutputFile);
+		browseOutputFileLocation.setVerticalAlignment(SwingConstants.TOP);
+		browseOutputFileLocation.setFont(new Font("Calibri", Font.PLAIN, 14));
+		browseOutputFileLocation.setBounds(391, 187, 85, 21);
+		frmTextLocaliser.getContentPane().add(browseOutputFileLocation);
 		
 		inputFileText = new JTextField();
 		inputFileText.setBounds(10, 128, 368, 19);
@@ -162,7 +182,7 @@ public class UserInterfaceGUI {
 			    	inputFileExists = true;
 			    }
 			    
-			    File outputFile = new File(outputFileDirectoryText.getText() +"\\" + outputFileName.getText());
+			    File outputFile = new File(outputFileDirectoryText.getText() + "\\" + outputFileName.getText() + ".txt");
 			    
 			    if (outputFile.exists() == false) {
 			    	outputFileExists = false;
@@ -175,13 +195,27 @@ public class UserInterfaceGUI {
 					JOptionPane.showMessageDialog(null, "Please fill out the output country correctly before continuing");
 				}
 				else if (inputFileExists == false) {
-					JOptionPane.showMessageDialog(null, "Please fill out the input file field correctly before continuing");
+					JOptionPane.showMessageDialog(null, "This file does not exist");
 				}
 				else if (outputFileExists == true) {
-					JOptionPane.showMessageDialog(null, "Please fill out output file fields correctly before continuing");
+					JOptionPane.showMessageDialog(null, "This file already exists");
+				}
+				else if (("//\\?%*:|<>.\"").equals(outputFileDirectoryText.getText())) {
+					JOptionPane.showMessageDialog(null, "Please enter a valid output file name");
+				}
+				else if (inputCountry.getSelectedItem().equals(outputCountry.getSelectedItem())) {
+					JOptionPane.showMessageDialog(null, "Input country and output country are equal");
 				}
 				else {
-					// return value to user interface
+					String values = inputCountry.getSelectedItem() + "   " + 
+							outputCountry.getSelectedItem() + "   " +
+							inputFileText.getText() + "   " +
+							outputFileDirectoryText.getText() + "\\" + outputFileName.getText() + ".txt";
+					
+					System.out.println(values); // need to delete
+					//return values;
+					
+					System.exit(0);
 				}
 			}
 		});
