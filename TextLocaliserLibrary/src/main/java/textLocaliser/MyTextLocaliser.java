@@ -8,6 +8,20 @@ import java.text.DecimalFormat;
 
 public class MyTextLocaliser implements TextLocaliser {
 	
+public void loadCurrencyRegularExpression(Map<String, String> location) {
+
+	location.put("UK", "^\\£(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d{2})?$");
+	location.put("US", "^\\$(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d{2})?$");
+	location.put("DE", "^(([1-9]\\d{0,2}(\\.\\d{3})*)|(([1-9]\\d*)?\\d))(,\\d{2})?\\€$");
+}
+
+public void loadDateRegularExpression(Map<String, String> location) {
+
+	location.put("UK", "^\\d{2}/\\d{2}/\\d{4}$");
+	location.put("US", "^\\d{2}/\\d{2}/\\d{2}$");
+	location.put("DE", "^\\d{4}-\\d{2}-\\d{2}$");
+}
+	
 public String insertString(String oldString, String stringToBeInserted, int index) {
         String newString = oldString.substring(0, index + 1) + stringToBeInserted + oldString.substring(index + 1); 
         return newString;
@@ -86,7 +100,7 @@ public void loadDateFormats(Map<String, String> dateformats) {
 }
 
 @Override
-public String localiesDate(String inputFormat, String outputFormat, String inputText) {
+public String localiseDate(String inputFormat, String outputFormat, String inputText) {
 	
 	String inputTextDelimiterValue = findDelimiter(inputText);
 	
@@ -230,7 +244,7 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 		
 		dateText = dateText.substring(2, (dateText.length()-1));
 		
-		String localDate = localiesDate(inputFormat, outputFormat, dateText);
+		String localDate = localiseDate(inputFormat, outputFormat, dateText);
 		
 		if (numberOfDates == 0) {
 			localisedDateValues = localDate;
