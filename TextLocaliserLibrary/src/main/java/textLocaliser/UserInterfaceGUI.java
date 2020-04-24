@@ -26,9 +26,6 @@ public class UserInterfaceGUI {
 	private JTextField outputFileDirectoryText;
 	private JTextField outputFileName;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String [] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,21 +37,12 @@ public class UserInterfaceGUI {
 				}
 			}
 		});
-		// need to return values from the bottom of the page
-		
-		// need to stop program finishing before finish button is pressed
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public UserInterfaceGUI() {
 		initialise();
 	}
 
-	/**
-	 * Initialise the contents of the frame.
-	 */
 	private void initialise() {
 		frmTextLocaliser = new JFrame();
 		frmTextLocaliser.setTitle("Text Localiser");
@@ -161,8 +149,6 @@ public class UserInterfaceGUI {
 		outputFileNameLabel.setFont(new Font("Calibri", Font.PLAIN, 16));
 		outputFileNameLabel.setBounds(10, 230, 286, 20);
 		frmTextLocaliser.getContentPane().add(outputFileNameLabel);
-		
-		// needs to be on the bottom of the code
 		
 		JButton finish = new JButton("Finish");
 		finish.setVerticalAlignment(SwingConstants.TOP);
