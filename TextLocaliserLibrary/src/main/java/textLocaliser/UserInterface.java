@@ -11,21 +11,35 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import textLocaliser.MyTextLocaliser;
-import textLocaliser.UserInterfaceGUI;
 
 public class UserInterface {
 
-public static void main (String [] args) {
+public void main (String inputCountryValue, String outputCountryValue, String inputFilePath, String outputFilePath) {
 		
-		UserInterfaceGUI GUI = new UserInterfaceGUI();
-
-		String values = GUI.main();
-		String valuesArray [] = values.split("   ");
+		String inputCountry = null;
+		String outputCountry = null;
+	
+		if (inputCountryValue.equals("United States of America")) {
+			inputCountry = "US";
+		}
+		else if (inputCountryValue.equals("United Kingdom")) {
+			inputCountry = "UK";
+		}
 		
-		String inputCountry = valuesArray[0];
-		String outputCountry = valuesArray[1];
-		String inputFilePath = valuesArray[2];
-		String outputFilePath = valuesArray[3];
+		else if (inputCountryValue.equals("Germany")) {
+			inputCountry = "DE";
+		}
+		
+		if (outputCountryValue.equals("United States of America")) {
+			outputCountry = "US";
+		}
+		else if (outputCountryValue.equals("United Kingdom")) {
+			outputCountry = "UK";
+		}
+		
+		else if (outputCountryValue.equals("Germany")) {
+			outputCountry = "DE";
+		}
 		
 		/* need to use GUI
 		
@@ -97,7 +111,7 @@ public static void main (String [] args) {
 		
 		try {
 			
-			File inputFile = new File(inputFilePath);	
+			File inputFile = new File(inputFilePath);
 
 			Scanner myReader = new Scanner(inputFile);
 			

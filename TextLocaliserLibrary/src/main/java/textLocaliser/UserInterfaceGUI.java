@@ -16,6 +16,8 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import textLocaliser.UserInterface;
+
 
 public class UserInterfaceGUI {
 
@@ -26,9 +28,8 @@ public class UserInterfaceGUI {
 
 	/**
 	 * Launch the application.
-	 * @return 
 	 */
-	public String main() {
+	public static void main(String [] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -39,7 +40,6 @@ public class UserInterfaceGUI {
 				}
 			}
 		});
-		return null;
 		// need to return values from the bottom of the page
 		
 		// need to stop program finishing before finish button is pressed
@@ -207,13 +207,13 @@ public class UserInterfaceGUI {
 					JOptionPane.showMessageDialog(null, "Input country and output country are equal");
 				}
 				else {
-					String values = inputCountry.getSelectedItem() + "   " + 
-							outputCountry.getSelectedItem() + "   " +
-							inputFileText.getText() + "   " +
-							outputFileDirectoryText.getText() + "\\" + outputFileName.getText() + ".txt";
+					String inputCountryValue = inputCountry.getSelectedItem().toString();
+					String outputCountryValue = outputCountry.getSelectedItem().toString();
+					String inputFileValue = inputFileText.getText();
+					String outputFileValue = outputFileDirectoryText.getText() + "\\" + outputFileName.getText() + ".txt";
 					
-					System.out.println(values); // need to delete
-					//return values;
+					UserInterface asdf = new UserInterface();
+					asdf.main(inputCountryValue, outputCountryValue, inputFileValue, outputFileValue);
 					
 					System.exit(0);
 				}
