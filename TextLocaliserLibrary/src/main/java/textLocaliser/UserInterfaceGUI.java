@@ -121,11 +121,13 @@ public class UserInterfaceGUI {
 		inputFileText.setBounds(10, 128, 368, 19);
 		frmTextLocaliser.getContentPane().add(inputFileText);
 		inputFileText.setColumns(10);
+		inputFileText.setEnabled(false);
 		
 		outputFileDirectoryText = new JTextField();
 		outputFileDirectoryText.setColumns(10);
 		outputFileDirectoryText.setBounds(10, 189, 368, 19);
 		frmTextLocaliser.getContentPane().add(outputFileDirectoryText);
+		outputFileDirectoryText.setEnabled(false);
 		
 		JLabel inputFileLabel = new JLabel("Please select an input file");
 		inputFileLabel.setVerticalAlignment(SwingConstants.TOP);
