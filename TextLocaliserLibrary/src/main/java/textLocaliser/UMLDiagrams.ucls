@@ -12,7 +12,7 @@
   </interface>  
   <class id="2" language="java" name="textLocaliser.UserInterface" project="TextLocaliserLibrary" 
     file="/TextLocaliserLibrary/src/main/java/textLocaliser/UserInterface.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="264" y="151"/>    
+    <position height="-1" width="-1" x="249" y="84"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -28,7 +28,16 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="4">    
+  <class id="4" language="java" name="textLocaliser.UserInterfaceGUI" project="TextLocaliserLibrary" 
+    file="/TextLocaliserLibrary/src/main/java/textLocaliser/UserInterfaceGUI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="253" y="244"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="5">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
