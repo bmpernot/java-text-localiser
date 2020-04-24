@@ -8,18 +8,18 @@ import java.text.DecimalFormat;
 
 public class MyTextLocaliser implements TextLocaliser {
 	
-public void loadCurrencyRegularExpression(Map<String, String> location) {
+public void loadCurrencyRegularExpression(Map<String, String> RegEx) {
 
-	location.put("UK", "^\\£(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d{2})?$");
-	location.put("US", "^\\$(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d{2})?$");
-	location.put("DE", "^(([1-9]\\d{0,2}(\\.\\d{3})*)|(([1-9]\\d*)?\\d))(,\\d{2})?\\€$");
+	RegEx.put("UK", "\\£(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d{2})?");
+	RegEx.put("US", "\\$(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d{2})?");
+	RegEx.put("DE", "(([1-9]\\d{0,2}(\\.\\d{3})*)|(([1-9]\\d*)?\\d))(,\\d{2})?\\€");
 }
 
-public void loadDateRegularExpression(Map<String, String> location) {
+public void loadDateRegularExpression(Map<String, String> RegEx) {
 
-	location.put("UK", "^\\d{2}/\\d{2}/\\d{4}$");
-	location.put("US", "^\\d{2}/\\d{2}/\\d{2}$");
-	location.put("DE", "^\\d{4}-\\d{2}-\\d{2}$");
+	RegEx.put("UK", "\\d{2}/\\d{2}/\\d{4}");
+	RegEx.put("US", "\\d{2}/\\d{2}/\\d{2}");
+	RegEx.put("DE", "\\d{4}-\\d{2}-\\d{2}");
 }
 	
 public String insertString(String oldString, String stringToBeInserted, int index) {
@@ -229,7 +229,10 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 	String localisedDateValues = null;
 	int numberOfDates = 0;
 	
-	String regularExpressionDate = "D\\[[^\\[]*\\]";
+	Map<String, String> dateRegularExpression = new HashMap<String, String>();
+	loadDateRegularExpression(dateRegularExpression);
+	
+	String regularExpressionDate = dateRegularExpression.get(inputFormat);
 	Pattern datePattern = Pattern.compile(regularExpressionDate);
 	Matcher dateMatch = datePattern.matcher(inputtext);
 	
@@ -242,8 +245,6 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 		
 		dateText = inputtext.substring(start, end);
 		
-		dateText = dateText.substring(2, (dateText.length()-1));
-		
 		String localDate = localiseDate(inputFormat, outputFormat, dateText);
 		
 		if (numberOfDates == 0) {
@@ -251,18 +252,21 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 		}
 		
 		else {
-			localisedDateValues = localisedDateValues + " " + localDate;
+			localisedDateValues = localisedDateValues + "localisedValuesDelimiter" + localDate;
 		}
 		
 		numberOfDates++;
 	}
 	
-	localisedDateValues = numberOfDates + " " + localisedDateValues;
+	localisedDateValues = numberOfDates + "localisedValuesDelimiter" + localisedDateValues;
 	
 	String localisedCurrencyValues = null;
 	int numberOfCurrencies = 0;
 	
-	String regularExpressionCurrency = "C\\[[^\\[]*\\]";
+	Map<String, String> currencyRegularExpression = new HashMap<String, String>();
+	loadCurrencyRegularExpression(currencyRegularExpression);
+	
+	String regularExpressionCurrency = currencyRegularExpression.get(inputFormat);
 	Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
     Matcher currencyMatch = currencyPattern.matcher(inputtext);
     
@@ -280,11 +284,11 @@ public String localise(String inputFormat, String outputFormat, String inputtext
     	String position = location.get(inputFormat);
     	
     	if (position.equals("pre")) {
-    		currencyText = currencyText.substring(3, currencyText.length()-1);
+    		currencyText = currencyText.substring(1, currencyText.length());
     	}
     	
     	else if (position.equals("post")) {
-    		currencyText = currencyText.substring(2, (currencyText.length()-2));
+    		currencyText = currencyText.substring(0, (currencyText.length()-1));
     	}
     	
     	else {}
@@ -307,16 +311,16 @@ public String localise(String inputFormat, String outputFormat, String inputtext
 		}
 		
 		else {
-			localisedCurrencyValues = localisedCurrencyValues + " " + localCurrency;
+			localisedCurrencyValues = localisedCurrencyValues + "localisedValuesDelimiter" + localCurrency;
 		}
 		
 		numberOfCurrencies++;
 		
     }   	
     
-    localisedCurrencyValues = numberOfCurrencies + " " + localisedCurrencyValues;
+    localisedCurrencyValues = numberOfCurrencies + "localisedValuesDelimiter" + localisedCurrencyValues;
 	
-    String localisedValues = localisedDateValues + " " + localisedCurrencyValues;
+    String localisedValues = localisedDateValues + "localisedValuesDelimiter" + localisedCurrencyValues;
     
 	return localisedValues;
 }
