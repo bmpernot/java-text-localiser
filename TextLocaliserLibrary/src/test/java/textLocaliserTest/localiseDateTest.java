@@ -2,11 +2,23 @@ package textLocaliserTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import textLocaliser.MyTextLocaliser;
 
-class localiseDateTest {
+public class localiseDateTest {
+	
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		
+	}
+	
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+		
+	}
 
 	@Test
 	void testMethod() {

@@ -2,11 +2,23 @@ package textLocaliserTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import textLocaliser.MyTextLocaliser;
 
-class insertStringTest {
+public class insertStringTest {
+	
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		
+	}
+	
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+		
+	}
 
 	@Test
 	void testMethod() {
@@ -18,6 +30,7 @@ class insertStringTest {
 		String expectedResult = "The quick brown fox jumped over the lazy dog";
 		String result = instance.insertString(oldString, stringToBeAdded, index);
 		assertEquals(expectedResult, result);
+		System.out.println("insert string");
 	}
 
 }

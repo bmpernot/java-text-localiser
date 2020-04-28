@@ -2,11 +2,23 @@ package textLocaliserTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import textLocaliser.MyTextLocaliser;
 
-class localiseCurrencyTest {
+public class localiseCurrencyTest {
+	
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		
+	}
+	
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+		
+	}
 
 	@Test
 	void testMethod() {
@@ -18,6 +30,7 @@ class localiseCurrencyTest {
 		String expectedResult = "£78,771.35";
 		String result = instance.localiseCurrency(inputFormat, outputFormat, inputText);
 		assertEquals(expectedResult, result);
+		System.out.println("localise currency");
 	}
 
 }
