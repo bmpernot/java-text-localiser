@@ -5,4 +5,9 @@
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
     <fullyQualifiedTypeName name="java.util.Currency"/>
     <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="javax.swing.ComboBoxModel"/>
+    <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
+    <fullyQualifiedTypeName name="javax.swing.filechooser.FileNameExtensionFilter"/>
+    <fullyQualifiedTypeName name="textLocaliser.UserInterface"/>
 </qualifiedTypeNameHistroy>

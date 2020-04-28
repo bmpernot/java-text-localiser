@@ -200,8 +200,8 @@ public class UserInterfaceGUI {
 					String inputFileValue = inputFileText.getText();
 					String outputFileValue = outputFileDirectoryText.getText() + "\\" + outputFileName.getText() + ".txt";
 					
-					UserInterface asdf = new UserInterface();
-					asdf.main(inputCountryValue, outputCountryValue, inputFileValue, outputFileValue);
+					UserInterface userInterface = new UserInterface();
+					userInterface.main(inputCountryValue, outputCountryValue, inputFileValue, outputFileValue);
 					
 					System.exit(0);
 				}
