@@ -9,9 +9,29 @@ import textLocaliser.MyTextLocaliser;
 public class FindDelimiterTest {
 
 	@Test
-	public void test() {
-		System.out.println("Testing the find delimiter method");
+	public void test1() {
+		System.out.println("Testing the find delimiter method 1");
 		String test = "dd/mm/yy";
+		MyTextLocaliser instance = new MyTextLocaliser();
+		String expectedResult = "/";
+		String result = instance.findDelimiter(test);
+		assertEquals(expectedResult, result);
+	}
+	
+	@Test
+	public void test2() {
+		System.out.println("Testing the find delimiter method 2");
+		String test = "yyyy-mm-dd";
+		MyTextLocaliser instance = new MyTextLocaliser();
+		String expectedResult = "-";
+		String result = instance.findDelimiter(test);
+		assertEquals(expectedResult, result);
+	}
+	
+	@Test
+	public void test3() {
+		System.out.println("Testing the find delimiter method 3");
+		String test = "mm/dd/yy";
 		MyTextLocaliser instance = new MyTextLocaliser();
 		String expectedResult = "/";
 		String result = instance.findDelimiter(test);
