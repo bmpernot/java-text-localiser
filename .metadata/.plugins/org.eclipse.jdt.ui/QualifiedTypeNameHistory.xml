@@ -10,4 +10,8 @@
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
     <fullyQualifiedTypeName name="javax.swing.filechooser.FileNameExtensionFilter"/>
     <fullyQualifiedTypeName name="textLocaliser.UserInterface"/>
+    <fullyQualifiedTypeName name="textLocaliserTest.findDelimiterTest"/>
+    <fullyQualifiedTypeName name="org.junit.runner.JUnitCore"/>
+    <fullyQualifiedTypeName name="org.junit.runner.Result"/>
+    <fullyQualifiedTypeName name="org.junit.runners.AllTests"/>
 </qualifiedTypeNameHistroy>

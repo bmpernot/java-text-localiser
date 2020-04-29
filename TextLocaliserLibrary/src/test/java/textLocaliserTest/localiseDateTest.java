@@ -10,7 +10,7 @@ public class LocaliseDateTest {
 
 	@Test
 	public void test1() {
-		System.out.println("Testing the localise date method 1");
+		System.out.println("the localise date method 1");
 		String inputFormat = "US";
 		String outputFormat = "UK";
 		String inputText = "05/24/20";
