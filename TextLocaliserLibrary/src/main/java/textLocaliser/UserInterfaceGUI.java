@@ -16,7 +16,7 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import textLocaliser.UserInterface;
+import textLocaliser.ReaderAndWriter;
 
 
 public class UserInterfaceGUI {
@@ -200,8 +200,8 @@ public class UserInterfaceGUI {
 					String inputFileValue = inputFileText.getText();
 					String outputFileValue = outputFileDirectoryText.getText() + "\\" + outputFileName.getText() + ".txt";
 					
-					UserInterface userInterface = new UserInterface();
-					userInterface.main(inputCountryValue, outputCountryValue, inputFileValue, outputFileValue);
+					ReaderAndWriter readerAndWriter = new ReaderAndWriter();
+					readerAndWriter.main(inputCountryValue, outputCountryValue, inputFileValue, outputFileValue);
 					
 					System.exit(0);
 				}

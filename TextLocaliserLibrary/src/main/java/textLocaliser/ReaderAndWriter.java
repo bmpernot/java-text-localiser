@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 import textLocaliser.MyTextLocaliser;
 
-public class UserInterface {
+public class ReaderAndWriter {
 
 public void main (String inputCountryValue, String outputCountryValue, String inputFilePath, String outputFilePath) {
 		

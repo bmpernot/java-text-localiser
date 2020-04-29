@@ -5,8 +5,20 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ FindDelimiterTest.class, FindIndexNumberTest.class, InsertStringTest.class, LocaliseCurrencyTest.class,
-		LocaliseDateTest.class })
+@SuiteClasses({ 
+	FindDelimiterTest.class, 
+	FindIndexNumberTest.class, 
+	InsertStringTest.class, 
+	LocaliseCurrencyTest.class,
+	LocaliseDateTest.class,
+	LocaliseTest.class,
+	LoadCurrencyExchangeRateTest.class,
+	LoadCurrencyFormatsTest.class,
+	LoadCurrencySymbolsLocationTest.class,
+	LoadCurrencyRegularExpressionTest.class,
+	LoadDateFormatsTest.class,
+	LoadDateRegularExpressionTest.class
+	})
 public class AllTests {
 
 }
