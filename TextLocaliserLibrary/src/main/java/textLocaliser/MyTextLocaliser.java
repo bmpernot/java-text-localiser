@@ -23,20 +23,23 @@ public void loadDateRegularExpression(Map<String, String> RegEx) {
 }
 	
 public String insertString(String oldString, String stringToBeInserted, int index) {
-        String newString = oldString.substring(0, index + 1) + stringToBeInserted + oldString.substring(index + 1); 
-        return newString;
+    String newString = oldString.substring(0, index + 1) + stringToBeInserted + oldString.substring(index + 1); 
+    return newString;
 }
 
 public void loadCurrencyExchangeRate(Map<String, Double> exchangeRate) {
 
 	exchangeRate.put("UK-DE", 1.15);
 	exchangeRate.put("UK-US", 1.30);
+	exchangeRate.put("UK-UK", 1.00);
 	
 	exchangeRate.put("US-UK", 0.77);
 	exchangeRate.put("US-DE", 0.88);
+	exchangeRate.put("US-US", 1.00);
 	
 	exchangeRate.put("DE-UK", 0.87);
 	exchangeRate.put("DE-US", 1.13);
+	exchangeRate.put("DE-DE", 1.00);
 }
 	
 public void loadCurrencySymbolsLocation(Map<String, String> location) {
@@ -129,24 +132,26 @@ public String localiseDate(String inputFormat, String outputFormat, String input
 	for (int increment = 0; increment < inputFormatDateFields.length; increment++) {
 		convert.put(inputFormatDateFields[increment], inputTextDateFields[increment]);
 	}
-	
+	// fix the keys
 	int inputYear = findIndexNumber(inputFormatDateFields, "y");
 	
 	int outputYear = findIndexNumber(outputFormatDateFields, "y");
 
-	if (outputFormatDateFields[outputYear] == inputFormatDateFields[inputYear]) {}
+	if (outputFormatDateFields[outputYear].equals(inputFormatDateFields[inputYear])) {}
 	
 	else if (inputFormatDateFields[inputYear].equals("yy")) {
-		outputFormatDateFields[outputYear] = "20" + inputTextDateFields[inputYear];
+		String yearValue = convert.get(inputFormatDateFields[inputYear]);
+		convert.put(outputFormatDateFields[outputYear], "20" + yearValue);
 	}
 	
 	else {
-		outputFormatDateFields[outputYear] = inputTextDateFields[inputYear].substring(2);
+		String yearValue = convert.get(inputFormatDateFields[inputYear]);
+		convert.put(outputFormatDateFields[outputYear], yearValue.substring(2));
 	}
-	
+	// fix
 	String localisedDate = convert.get(outputFormatDateFields[0]) + outputFormatDelimiterValue + 
 			convert.get(outputFormatDateFields[1]) + outputFormatDelimiterValue + 
-			outputFormatDateFields[2];
+			convert.get(outputFormatDateFields[2]);
 	
 	return localisedDate;
 }
@@ -171,7 +176,7 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	Map<String, String> symbolMap = new HashMap<String, String>();
 	loadCurrencyFormats(symbolMap);
 	
-	double exchangeRate = 0;
+	double exchangeRate = 1;
 	
 	String key = inputFormat + "-" + outputFormat;
 
@@ -179,15 +184,15 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 
 	double finalValue = inputText*exchangeRate;
 	
-	DecimalFormat df = new DecimalFormat("0.00");
+	DecimalFormat decimalFormat = new DecimalFormat("0.00");
 	
-	String localisedCurrency = df.format(finalValue);
+	String localisedCurrency = decimalFormat.format(finalValue);
 	int numberOfSpaces = 0;
 	int index = localisedCurrency.length()-7;
 	
 	if (outputFormat.equals("DE")) {
 		localisedCurrency = localisedCurrency.replace(".", ",");
-		for (int increment = 1; increment <= ((localisedCurrency.length()-4)/3); increment++) {
+		for (int increment = 1; increment <= ((localisedCurrency.length()-4 - numberOfSpaces)/3); increment++) {
 			localisedCurrency = insertString(localisedCurrency, ".", index - numberOfSpaces);
 			numberOfSpaces++;
 			index = index - 3;
@@ -195,7 +200,7 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	}
 	
 	else if(outputFormat.equals("US") || outputFormat.equals("UK")) {
-		for (int increment = 1; increment <= ((localisedCurrency.length()-4)/3); increment++) {	
+		for (int increment = 1; increment <= ((localisedCurrency.length()-4 - numberOfSpaces)/3); increment++) {	
 			localisedCurrency = insertString(localisedCurrency, ",", index - numberOfSpaces);
 			numberOfSpaces++;
 			index = index - 3;
