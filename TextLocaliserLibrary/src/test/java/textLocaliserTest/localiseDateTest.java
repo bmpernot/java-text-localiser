@@ -1,27 +1,15 @@
 package textLocaliserTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
 
 import textLocaliser.MyTextLocaliser;
 
-public class localiseDateTest {
-	
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-		
-	}
-	
-	@AfterClass
-	public static void tearDownClass() throws Exception {
-		
-	}
+public class LocaliseDateTest {
 
 	@Test
-	void testMethod() {
+	public void test() {
 		System.out.println("Testing the localise date method");
 		String inputFormat = "US";
 		String outputFormat = "UK";

@@ -1,34 +1,20 @@
 package textLocaliserTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
 
 import textLocaliser.MyTextLocaliser;
 
-public class findDelimiterTest {
-	
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-		
-	}
-	
-	@AfterClass
-	public static void tearDownClass() throws Exception {
-		
-	}
+public class FindDelimiterTest {
 
 	@Test
-	public void testMethod() {
+	public void test() {
 		System.out.println("Testing the find delimiter method");
 		String test = "dd/mm/yy";
 		MyTextLocaliser instance = new MyTextLocaliser();
 		String expectedResult = "/";
 		String result = instance.findDelimiter(test);
 		assertEquals(expectedResult, result);
-		System.out.println("find delimiter");
 	}
-
 }

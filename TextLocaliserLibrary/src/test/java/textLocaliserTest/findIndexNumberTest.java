@@ -1,27 +1,15 @@
 package textLocaliserTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
 
 import textLocaliser.MyTextLocaliser;
 
-public class findIndexNumberTest {
-	
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-		
-	}
-	
-	@AfterClass
-	public static void tearDownClass() throws Exception {
-		
-	}
+public class FindIndexNumberTest {
 
 	@Test
-	void testMethod() {
+	public void test() {
 		System.out.println("Testing the find index number method");
 		String string = "abcdefghijklmnopqrstuvwxyz";
 		String test [] = string.split("");
@@ -29,7 +17,6 @@ public class findIndexNumberTest {
 		int expectedResult = 24;
 		int result = instance.findIndexNumber(test, "y");
 		assertEquals(expectedResult, result);
-		System.out.println("find index number");
 	}
 
 }
