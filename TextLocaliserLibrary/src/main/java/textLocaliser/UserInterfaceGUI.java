@@ -175,24 +175,26 @@ public class UserInterfaceGUI {
 			    if (outputFile.exists() == false) {
 			    	outputFileExists = false;
 			    }
-				
 				if (inputCountry.getSelectedItem().equals("")){
-					JOptionPane.showMessageDialog(null, "Please fill out the input country correctly before continuing");
+					JOptionPane.showMessageDialog(null, "Please fill out the input country field before continuing");
 				}
 				else if (outputCountry.getSelectedItem().equals("")) {
-					JOptionPane.showMessageDialog(null, "Please fill out the output country correctly before continuing");
+					JOptionPane.showMessageDialog(null, "Please fill out the output country field before continuing");
 				}
 				else if (inputFileExists == false) {
-					JOptionPane.showMessageDialog(null, "This file does not exist");
+					JOptionPane.showMessageDialog(null, "This file does not exist, please change input file before continuing");
 				}
 				else if (outputFileExists == true) {
-					JOptionPane.showMessageDialog(null, "This file already exists");
+					JOptionPane.showMessageDialog(null, "This file already exists, please change the name before continuing");
+				}
+				else if (("").equals(outputFileDirectoryText.getText())) {
+					JOptionPane.showMessageDialog(null, "Please enter a output file name before continuing");
 				}
 				else if (("//\\?%*:|<>.\"").equals(outputFileDirectoryText.getText())) {
 					JOptionPane.showMessageDialog(null, "Please enter a valid output file name");
 				}
 				else if (inputCountry.getSelectedItem().equals(outputCountry.getSelectedItem())) {
-					JOptionPane.showMessageDialog(null, "Input country and output country are equal");
+					JOptionPane.showMessageDialog(null, "Input country and output country are equal, please change one value before continuing");
 				}
 				else {
 					String inputCountryValue = inputCountry.getSelectedItem().toString();
@@ -201,7 +203,7 @@ public class UserInterfaceGUI {
 					String outputFileValue = outputFileDirectoryText.getText() + "\\" + outputFileName.getText() + ".txt";
 					
 					ReaderAndWriter readerAndWriter = new ReaderAndWriter();
-					readerAndWriter.main(inputCountryValue, outputCountryValue, inputFileValue, outputFileValue);
+					readerAndWriter.readerAndWriter(inputCountryValue, outputCountryValue, inputFileValue, outputFileValue);
 					
 					System.exit(0);
 				}

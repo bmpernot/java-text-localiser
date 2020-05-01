@@ -132,7 +132,7 @@ public String localiseDate(String inputFormat, String outputFormat, String input
 	for (int increment = 0; increment < inputFormatDateFields.length; increment++) {
 		convert.put(inputFormatDateFields[increment], inputTextDateFields[increment]);
 	}
-	// fix the keys
+	
 	int inputYear = findIndexNumber(inputFormatDateFields, "y");
 	
 	int outputYear = findIndexNumber(outputFormatDateFields, "y");
@@ -148,7 +148,7 @@ public String localiseDate(String inputFormat, String outputFormat, String input
 		String yearValue = convert.get(inputFormatDateFields[inputYear]);
 		convert.put(outputFormatDateFields[outputYear], yearValue.substring(2));
 	}
-	// fix
+	
 	String localisedDate = convert.get(outputFormatDateFields[0]) + outputFormatDelimiterValue + 
 			convert.get(outputFormatDateFields[1]) + outputFormatDelimiterValue + 
 			convert.get(outputFormatDateFields[2]);

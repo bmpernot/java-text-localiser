@@ -16,7 +16,7 @@ import textLocaliser.MyTextLocaliser;
 
 public class ReaderAndWriter {
 
-public void main (String inputCountryValue, String outputCountryValue, String inputFilePath, String outputFilePath) {
+public void readerAndWriter (String inputCountryValue, String outputCountryValue, String inputFilePath, String outputFilePath) {
 		
 		String inputCountry = null;
 		String outputCountry = null;

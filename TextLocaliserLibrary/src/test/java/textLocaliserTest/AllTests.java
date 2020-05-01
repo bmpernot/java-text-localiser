@@ -17,8 +17,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	LoadCurrencySymbolsLocationTest.class,
 	LoadCurrencyRegularExpressionTest.class,
 	LoadDateFormatsTest.class,
-	LoadDateRegularExpressionTest.class,
-	ReaderAndWriterTest.class
+	LoadDateRegularExpressionTest.class
 	})
 public class AllTests {
 
