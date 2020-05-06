@@ -1,7 +1,0 @@
-Order delivery details below:
-
-Price of the item ordered is £78,771.35
-
-Order placed on 24/01/2020
-
-Order is expected to reach on 05/02/2020
