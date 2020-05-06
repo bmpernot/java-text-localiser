@@ -159,7 +159,7 @@ public String localiseDate(String inputFormat, String outputFormat, String input
 @Override
 public void loadCurrencyFormats(Map<String, String> currencyformats) {
 
-	currencyformats.put("US", "$");	
+	currencyformats.put("US", "\\$");	
 	currencyformats.put("UK", "£");
 	currencyformats.put("DE", "€");
 }
@@ -193,7 +193,7 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	if (outputFormat.equals("DE")) {
 		localisedCurrency = localisedCurrency.replace(".", ",");
 		for (int increment = 1; increment <= ((localisedCurrency.length()-4 - numberOfSpaces)/3); increment++) {
-			localisedCurrency = insertString(localisedCurrency, ".", index - numberOfSpaces);
+			localisedCurrency = insertString(localisedCurrency, ".", index);
 			numberOfSpaces++;
 			index = index - 3;
 		}
@@ -201,7 +201,7 @@ public String localiseCurrency(String inputFormat, String outputFormat, double i
 	
 	else if(outputFormat.equals("US") || outputFormat.equals("UK")) {
 		for (int increment = 1; increment <= ((localisedCurrency.length()-4 - numberOfSpaces)/3); increment++) {	
-			localisedCurrency = insertString(localisedCurrency, ",", index - numberOfSpaces);
+			localisedCurrency = insertString(localisedCurrency, ",", index);
 			numberOfSpaces++;
 			index = index - 3;
 		}

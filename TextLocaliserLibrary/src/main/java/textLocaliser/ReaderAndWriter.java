@@ -49,7 +49,7 @@ public void readerAndWriter (String inputCountryValue, String outputCountryValue
 			
 			File inputFile = new File(inputFilePath);
 
-			Scanner myReader = new Scanner(inputFile);
+			Scanner myReader = new Scanner(inputFile, "UTF-8");
 			
 			while (myReader.hasNextLine()) {
 				String FileText = myReader.nextLine();
@@ -88,7 +88,7 @@ public void readerAndWriter (String inputCountryValue, String outputCountryValue
 		String localisedValues = MyConverter.localise(inputCountry, outputCountry, inputText);
 		
 		String localisedValuesArray [] = localisedValues.split("localisedValuesDelimiter");
-		
+
 		String numberOfDates = localisedValuesArray[0];
 
 		String regularExpressionDate = dateRegularExpression.get(inputCountry);
