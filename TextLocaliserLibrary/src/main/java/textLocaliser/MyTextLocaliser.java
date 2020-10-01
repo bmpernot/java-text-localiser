@@ -159,7 +159,7 @@ public String localiseDate(String inputFormat, String outputFormat, String input
 @Override
 public void loadCurrencyFormats(Map<String, String> currencyformats) {
 
-	currencyformats.put("US", "\\$");	
+	currencyformats.put("US", "\\$");
 	currencyformats.put("UK", "£");
 	currencyformats.put("DE", "€");
 }

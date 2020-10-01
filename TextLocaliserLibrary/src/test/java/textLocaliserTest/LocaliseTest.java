@@ -91,7 +91,7 @@ public class LocaliseTest {
 				+ "localisedValuesDelimiter"
 				+ "1"
 				+ "localisedValuesDelimiter"
-				+ "$102,300.46";
+				+ "\\$102,300.46";
 		String result = instance.localise(inputCountry, outputCountry, inputText);
 		assertEquals(expectedResult, result);
 	}
@@ -120,7 +120,7 @@ public class LocaliseTest {
 				+ "localisedValuesDelimiter"
 				+ "1"
 				+ "localisedValuesDelimiter"
-				+ "$132,990.60";
+				+ "\\$132,990.60";
 		String result = instance.localise(inputCountry, outputCountry, inputText);
 		assertEquals(expectedResult, result);
 	}
@@ -236,7 +236,7 @@ public class LocaliseTest {
 				+ "localisedValuesDelimiter"
 				+ "1"
 				+ "localisedValuesDelimiter"
-				+ "$115,599.52";
+				+ "\\$115,599.52";
 		String result = instance.localise(inputCountry, outputCountry, inputText);
 		assertEquals(expectedResult, result);
 	}

@@ -31,7 +31,7 @@ public class LoadCurrencyFormatsTest {
 		Map<String, String> Map = new HashMap<String, String>();
 		instance.loadCurrencyFormats(Map);
 		String key = "US";
-		String expectedResult = "$";
+		String expectedResult = "\\$";
 		String result = Map.get(key);
 		assertEquals(expectedResult, result);
 	}

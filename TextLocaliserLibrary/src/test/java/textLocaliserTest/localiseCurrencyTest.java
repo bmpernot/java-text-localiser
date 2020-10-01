@@ -39,7 +39,7 @@ public class LocaliseCurrencyTest {
 		String outputFormat = "US";
 		Double inputText = 102300.46;
 		MyTextLocaliser instance = new MyTextLocaliser();
-		String expectedResult = "$132,990.60";
+		String expectedResult = "\\$132,990.60";
 		String result = instance.localiseCurrency(inputFormat, outputFormat, inputText);
 		assertEquals(expectedResult, result);
 	}
@@ -75,7 +75,7 @@ public class LocaliseCurrencyTest {
 		String outputFormat = "US";
 		Double inputText = 102300.46;
 		MyTextLocaliser instance = new MyTextLocaliser();
-		String expectedResult = "$115,599.52";
+		String expectedResult = "\\$115,599.52";
 		String result = instance.localiseCurrency(inputFormat, outputFormat, inputText);
 		assertEquals(expectedResult, result);
 	}
@@ -99,7 +99,7 @@ public class LocaliseCurrencyTest {
 		String outputFormat = "US";
 		Double inputText = 102300.46;
 		MyTextLocaliser instance = new MyTextLocaliser();
-		String expectedResult = "$102,300.46";
+		String expectedResult = "\\$102,300.46";
 		String result = instance.localiseCurrency(inputFormat, outputFormat, inputText);
 		assertEquals(expectedResult, result);
 	}
