@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <interface id="1" language="java" name="textLocaliser.TextLocaliser" project="TextLocaliserLibrary" 
     file="/TextLocaliserLibrary/src/main/java/textLocaliser/TextLocaliser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="556" y="418"/>    
+    <position height="-1" width="-1" x="552" y="464"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </interface>  
   <class id="2" language="java" name="textLocaliser.UserInterface" project="TextLocaliserLibrary" 
     file="/TextLocaliserLibrary/src/main/java/textLocaliser/UserInterface.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="249" y="84"/>    
+    <position height="-1" width="-1" x="220" y="95"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="textLocaliser.MyTextLocaliser" project="TextLocaliserLibrary" 
     file="/TextLocaliserLibrary/src/main/java/textLocaliser/MyTextLocaliser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="268" width="349" x="373" y="31"/>    
+    <position height="-1" width="-1" x="557" y="194"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="textLocaliser.UserInterfaceGUI" project="TextLocaliserLibrary" 
     file="/TextLocaliserLibrary/src/main/java/textLocaliser/UserInterfaceGUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="253" y="244"/>    
+    <position height="-1" width="-1" x="224" y="276"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

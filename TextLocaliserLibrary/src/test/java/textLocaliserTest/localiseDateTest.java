@@ -16,7 +16,7 @@ class localiseDateTest {
 		String inputText = "05/24/20";
 		MyTextLocaliser instance = new MyTextLocaliser();
 		String expectedResult = "24/05/2020";
-		String result = instance.localiesDate(inputFormat, outputFormat, inputText);
+		String result = instance.localiseDate(inputFormat, outputFormat, inputText);
 		assertEquals(expectedResult, result);
 	}
 

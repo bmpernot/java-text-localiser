@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -65,25 +67,31 @@ public void main (String inputCountryValue, String outputCountryValue, String in
 		
 		while (fileLine < fileLines.size()) {
 			if(inputText.equals("empty") == true) { 
-				inputText = fileLines.get(fileLine) + "   ";
+				inputText = fileLines.get(fileLine) + "inputTextDelimiter";
 				fileLine++;
 			}
 			
 			else {
-				inputText = inputText + fileLines.get(fileLine) + "   ";
+				inputText = inputText + fileLines.get(fileLine) + "inputTextDelimiter";
 				fileLine++;
 			}
 		}
 		
 		TextLocaliser MyConverter = new MyTextLocaliser();
 		
+		Map<String, String> dateRegularExpression = new HashMap<String, String>();
+		((MyTextLocaliser) MyConverter).loadDateRegularExpression(dateRegularExpression);
+		
+		Map<String, String> currencyRegularExpression = new HashMap<String, String>();
+		((MyTextLocaliser) MyConverter).loadCurrencyRegularExpression(currencyRegularExpression);
+		
 		String localisedValues = MyConverter.localise(inputCountry, outputCountry, inputText);
 		
-		String localisedValuesArray [] = localisedValues.split(" ");
+		String localisedValuesArray [] = localisedValues.split("localisedValuesDelimiter");
 		
 		String numberOfDates = localisedValuesArray[0];
 
-		String regularExpressionDate = "D\\[[^\\[]*\\]";
+		String regularExpressionDate = dateRegularExpression.get(inputCountry);
 		Pattern datePattern = Pattern.compile(regularExpressionDate);
 		Matcher dateMatch = datePattern.matcher(inputText);
 		
@@ -100,7 +108,7 @@ public void main (String inputCountryValue, String outputCountryValue, String in
 		StringBuffer stringBufferDate = new StringBuffer();
 		
 		while (dateMatch.find()) {
-			dateText = "D[" + localDateArray.get(dates) + "]";
+			dateText = localDateArray.get(dates);
 			dates++;
 			dateMatch.appendReplacement(stringBufferDate, dateText);
 		}
@@ -120,7 +128,7 @@ public void main (String inputCountryValue, String outputCountryValue, String in
 			numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);	
 		}
 
-		String regularExpressionCurrency = "C\\[[^\\[]*\\]";
+		String regularExpressionCurrency = currencyRegularExpression.get(inputCountry);
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
 		Matcher currencyMatch = currencyPattern.matcher(newText);
 		
@@ -148,7 +156,7 @@ public void main (String inputCountryValue, String outputCountryValue, String in
 		StringBuffer stringBufferCurrency = new StringBuffer();
 		
 		while (currencyMatch.find()) {
-			currencyText = "C[" + localCurrencyArray.get(currencies) + "]";
+			currencyText = localCurrencyArray.get(currencies);
 			currencies++;
 			currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 		}
@@ -157,7 +165,7 @@ public void main (String inputCountryValue, String outputCountryValue, String in
 		
 		String finalText = stringBufferCurrency.toString();
 		
-		String outputTextArray [] = finalText.split("   ");
+		String outputTextArray [] = finalText.split("inputTextDelimiter");
 		
 		try {
 		      File outputWriter = new File(outputFilePath);
