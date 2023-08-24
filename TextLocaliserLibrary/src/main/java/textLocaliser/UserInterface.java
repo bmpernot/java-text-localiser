@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,46 +16,38 @@ import textLocaliser.MyTextLocaliser;
 
 public class UserInterface {
 
-public static void main (String [] args) {
+public void main (String inputCountryValue, String outputCountryValue, String inputFilePath, String outputFilePath) {
 		
-		Scanner userInput = new Scanner(System.in);
+		String inputCountry = null;
+		String outputCountry = null;
+	
+		if (inputCountryValue.equals("United States of America")) {
+			inputCountry = "US";
+		}
+		else if (inputCountryValue.equals("United Kingdom")) {
+			inputCountry = "UK";
+		}
 		
-	    System.out.println("Please enter the country format the file is in: (UK, US, DE)");
-	    String inputCountry = userInput.nextLine(); 
-	    inputCountry = inputCountry.toUpperCase();
-	    
-	    System.out.println("Please enter the country format that you want the output file to be in: (UK, US, DE)");
-	    String outputCountry = userInput.nextLine(); 
-	    outputCountry = outputCountry.toUpperCase();
-	    
-	    System.out.println("Please enter the output text file's name:");
-	    String outputFileName = userInput.nextLine(); 
-	    
-	    System.out.println("Please enter the output text file's location:");
-	    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
-	    System.out.println("for testing use - C:\\Users\\benpe\\Documents\\Java\\Assessment");
-	    String outputFileLocation = userInput.nextLine(); 
-	    
-	    System.out.println("Please enter the input text file's name:");
-	    System.out.println("for testing use - sampleFile");
-	    String inputFileName = userInput.nextLine(); 
-	    
-	    System.out.println("Please enter the input text file's location:");
-	    System.out.println("For example; C:\\Users\\Documents\\Java\\Assessment");
-	    System.out.println("for testing use - C:\\Users\\benpe\\Documents\\Java\\Assessment");
-	    String inputFileLocation = userInput.nextLine(); 
-	    
-	    userInput.close();
-	    
-	    String outputFilePath = outputFileLocation + "\\" + outputFileName + ".txt";
+		else if (inputCountryValue.equals("Germany")) {
+			inputCountry = "DE";
+		}
 		
-		String inputFilePath = inputFileLocation + "\\" + inputFileName + ".txt";
-
+		if (outputCountryValue.equals("United States of America")) {
+			outputCountry = "US";
+		}
+		else if (outputCountryValue.equals("United Kingdom")) {
+			outputCountry = "UK";
+		}
+		
+		else if (outputCountryValue.equals("Germany")) {
+			outputCountry = "DE";
+		}
+	    
 		ArrayList<String> fileLines = new ArrayList<String>();
 		
 		try {
 			
-			File inputFile = new File(inputFilePath);	
+			File inputFile = new File(inputFilePath);
 
 			Scanner myReader = new Scanner(inputFile);
 			
@@ -73,25 +67,31 @@ public static void main (String [] args) {
 		
 		while (fileLine < fileLines.size()) {
 			if(inputText.equals("empty") == true) { 
-				inputText = fileLines.get(fileLine) + "   ";
+				inputText = fileLines.get(fileLine) + "inputTextDelimiter";
 				fileLine++;
 			}
 			
 			else {
-				inputText = inputText + fileLines.get(fileLine) + "   ";
+				inputText = inputText + fileLines.get(fileLine) + "inputTextDelimiter";
 				fileLine++;
 			}
 		}
 		
 		TextLocaliser MyConverter = new MyTextLocaliser();
 		
+		Map<String, String> dateRegularExpression = new HashMap<String, String>();
+		((MyTextLocaliser) MyConverter).loadDateRegularExpression(dateRegularExpression);
+		
+		Map<String, String> currencyRegularExpression = new HashMap<String, String>();
+		((MyTextLocaliser) MyConverter).loadCurrencyRegularExpression(currencyRegularExpression);
+		
 		String localisedValues = MyConverter.localise(inputCountry, outputCountry, inputText);
 		
-		String localisedValuesArray [] = localisedValues.split(" ");
+		String localisedValuesArray [] = localisedValues.split("localisedValuesDelimiter");
 		
 		String numberOfDates = localisedValuesArray[0];
 
-		String regularExpressionDate = "D\\[[^\\[]*\\]";
+		String regularExpressionDate = dateRegularExpression.get(inputCountry);
 		Pattern datePattern = Pattern.compile(regularExpressionDate);
 		Matcher dateMatch = datePattern.matcher(inputText);
 		
@@ -108,7 +108,7 @@ public static void main (String [] args) {
 		StringBuffer stringBufferDate = new StringBuffer();
 		
 		while (dateMatch.find()) {
-			dateText = "D[" + localDateArray.get(dates) + "]";
+			dateText = localDateArray.get(dates);
 			dates++;
 			dateMatch.appendReplacement(stringBufferDate, dateText);
 		}
@@ -128,7 +128,7 @@ public static void main (String [] args) {
 			numberOfCurrency = Integer.parseInt(localisedValuesArray[Integer.parseInt(numberOfDates) + 1]);	
 		}
 
-		String regularExpressionCurrency = "C\\[[^\\[]*\\]";
+		String regularExpressionCurrency = currencyRegularExpression.get(inputCountry);
 		Pattern currencyPattern = Pattern.compile(regularExpressionCurrency);
 		Matcher currencyMatch = currencyPattern.matcher(newText);
 		
@@ -156,7 +156,7 @@ public static void main (String [] args) {
 		StringBuffer stringBufferCurrency = new StringBuffer();
 		
 		while (currencyMatch.find()) {
-			currencyText = "C[" + localCurrencyArray.get(currencies) + "]";
+			currencyText = localCurrencyArray.get(currencies);
 			currencies++;
 			currencyMatch.appendReplacement(stringBufferCurrency, currencyText);
 		}
@@ -165,7 +165,7 @@ public static void main (String [] args) {
 		
 		String finalText = stringBufferCurrency.toString();
 		
-		String outputTextArray [] = finalText.split("   ");
+		String outputTextArray [] = finalText.split("inputTextDelimiter");
 		
 		try {
 		      File outputWriter = new File(outputFilePath);

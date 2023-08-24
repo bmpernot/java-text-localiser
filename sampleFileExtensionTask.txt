@@ -1,0 +1,7 @@
+Order delivery details below:
+
+Price of the item ordered is $102,300.46
+
+Order placed on 01/24/20
+
+Order is expected to reach on 02/05/20
